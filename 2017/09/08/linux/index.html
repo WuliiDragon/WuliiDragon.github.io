@@ -1,0 +1,549 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable"  content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    <link rel="dns-prefetch" href="//t11.baidu.com">
+    <!--SEO-->
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>Linux 入门总结 | Hexo</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css?rev=9.12.0">
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+
+
+    
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header">
+    <div class="main-header-box">
+        <a class="branding" href="/" title="">
+            <img src="/img/header_logo.png" alt="Snippet 博客主题">
+        </a>
+        <h2 class="text-hide">Snippet主题</h2>
+        <img src="/img/header_logo.png" alt="Snippet 博客主题" class="hide">
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class=""><a href="/">首页</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Linux 入门总结">
+            
+            Linux 入门总结
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <span> </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            null
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">2017/09/08</span>
+    </span>
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body">
+        <h3 id="根目录"><a href="#根目录" class="headerlink" title="根目录"></a>根目录</h3><ul>
+<li>‘\’<br>‘/boot’ 系统启动目录，200MB 内存应该空余几十兆，<br>在形式上boot etc 等目录是根目录的子目录但在硬盘上却有自己的独立存储空间，即使是把其他目录写完，boot目录也不受影响，系统可以正常启动</li>
+</ul>
+<h3 id="ls命令"><a href="#ls命令" class="headerlink" title="ls命令"></a>ls命令</h3><ul>
+<li>-a 显示所有文件包括隐藏文件</li>
+<li>-l 文件的详细信息</li>
+<li>-d  查看目录的属性</li>
+<li>-h 按照标准的KB,MB,GB等显示文件大小</li>
+<li>-i 显示inode</li>
+</ul>
+<p>这些命令不加文件默认会操作当前文件夹下所有文件</p>
+<p>所有命令都是`命令 [选项] [参数] ‘<br>这种格式 []代表可选</p>
+<h2 id="文件处理目录"><a href="#文件处理目录" class="headerlink" title="文件处理目录"></a>文件处理目录</h2><hr>
+<p>###mkdir -p[目录名]<br>make directories 创建文件夹<br>-p 创建多级目录<br><code>mkdir -p dirfather/dirson</code><br>会创建dirfather/dirson 两级目录</p>
+<h3 id="cd"><a href="#cd" class="headerlink" title="cd"></a>cd</h3><p>change directory切换目录<br>control+l 清屏</p>
+<ul>
+<li>cd ~进入用户的hone目录</li>
+<li>cd - 进入上次目录</li>
+<li>cd .. 进入上一级目录</li>
+<li>cd . 进入当前目录</li>
+</ul>
+<h3 id="相对目录与绝对目录"><a href="#相对目录与绝对目录" class="headerlink" title="相对目录与绝对目录"></a>相对目录与绝对目录</h3><ul>
+<li>相对目录是参照当前目录</li>
+<li>绝对路径是参照更目录</li>
+</ul>
+<p>###pwd<br>print working directory 输出工作目录</p>
+<h3 id="remdir-目录名"><a href="#remdir-目录名" class="headerlink" title="remdir [目录名]"></a>remdir [目录名]</h3><p>remove empty directory 删除空文件夹<br>只能删除空目录</p>
+<h3 id="rm-rf-文件或目录"><a href="#rm-rf-文件或目录" class="headerlink" title="rm -rf [文件或目录]"></a>rm -rf [文件或目录]</h3><ul>
+<li>-r 删除目录</li>
+<li>-f 强制</li>
+</ul>
+<h3 id="cp-选项-源文件或目录-目标目录"><a href="#cp-选项-源文件或目录-目标目录" class="headerlink" title="cp [选项] [源文件或目录] [目标目录]"></a>cp [选项] [源文件或目录] [目标目录]</h3><p>copy 拷贝<br>选项：</p>
+<ul>
+<li>-r 赋值目录</li>
+<li>-p 连带文件属性赋值</li>
+<li>-d 若源文件是链接文件则赋值链接属性</li>
+<li>-a 所有选项的集合 相当于-pdr<br>cd name1 /路径/name2 这样称为改名复制</li>
+</ul>
+<h3 id="mv-原文件或目录-目标目录"><a href="#mv-原文件或目录-目标目录" class="headerlink" title="mv [原文件或目录] [目标目录]"></a>mv [原文件或目录] [目标目录]</h3><p>move 剪切移动</p>
+<ul>
+<li>可以用于改名，mv prename new name</li>
+</ul>
+<p>##常用目录</p>
+<ul>
+<li>/ 根目录</li>
+<li>/bin 命令保存目录 根目录和/usr下都有bin</li>
+<li>/lib 存放一些linux的库函数</li>
+<li>/mnt 系统挂载目录</li>
+<li>/home 普通用户家目录</li>
+<li>/root 超级用户家目录</li>
+<li>/tmp 存放一些临时文件</li>
+<li>/sbin 存放超级用户的命令</li>
+<li>/dev 设备文件保存目录,硬件信息</li>
+<li>/etc 配置文件保存目录</li>
+<li>/boo 启动目录,启动相关目录</li>
+<li>/media 挂在目录</li>
+<li>/proc 直接写入内存</li>
+<li>/usr 系统资源保存目录</li>
+</ul>
+<hr>
+<ul>
+<li>/var 系统相关文档内容</li>
+<li>/sys 系统相关文档内容<br>以上两个目录是用来保存内存的挂载点，不可进操作</li>
+</ul>
+<h3 id="以下四个目录都是用来保存系统目录的"><a href="#以下四个目录都是用来保存系统目录的" class="headerlink" title="以下四个目录都是用来保存系统目录的"></a>以下四个目录都是用来保存系统目录的</h3><ul>
+<li>/bin  </li>
+<li>/sbin</li>
+<li>/usr/bin</li>
+<li>/usr/sbin<br>bin 目录普通用户都可以使用<br>sbin 只有超级用户才可以使用</li>
+</ul>
+<p>##链接命令</p>
+<h3 id="ln-s-原文件-目标文件"><a href="#ln-s-原文件-目标文件" class="headerlink" title="ln -s [原文件] [目标文件]"></a>ln -s [原文件] [目标文件]</h3><p>link</p>
+<p>选项</p>
+<ul>
+<li>-s (soft)创建软连接</li>
+</ul>
+<p>####软链接与硬链接</p>
+<p>每个文件在文件列表中都有其对应的节点和文件信息，这些信息保存了文件内容所在的内存区块数等。<br>对文件做硬链接的时候，是将文件的节点和文件信息赋值了一份。所以原文件与连接文件拥有相同的节点。</p>
+<p>对文件做软链接的时候，会在文件链表写一份节点文件信息指向内存块，而内存块的内容就是原文件的节点和文件信息</p>
+<p>软硬链接修改都会引起文件内容的变化<br>对于删除原文件，硬链接可以访问继续，而软连接不可以访问。</p>
+<p>在做链接的时候指定原文件时应该使用绝对路径</p>
+<p>##文件搜索</p>
+<h3 id="locate-文件名"><a href="#locate-文件名" class="headerlink" title="locate [文件名]"></a>locate [文件名]</h3><ul>
+<li>/var/lib/mlocate 在此文件数据库中查</li>
+<li>updatedb 更新文件名数据库<br>块，但只能进行文件名搜索</li>
+</ul>
+<ul>
+<li>/etc/updatedb.conf 保存locate的搜索约束</li>
+</ul>
+<h3 id="whereis-选项-命令名字"><a href="#whereis-选项-命令名字" class="headerlink" title="whereis [选项] 命令名字"></a>whereis [选项] 命令名字</h3><p>用于搜索命令的命令<br>选项：</p>
+<ul>
+<li>-b 只查找可执行文件</li>
+<li>-m 只查找帮助文件</li>
+</ul>
+<h3 id="which-命令名"><a href="#which-命令名" class="headerlink" title="which 命令名"></a>which 命令名</h3><p>用于查找命令以及它的别名</p>
+<p>在命令行中执行命令是会在 echo $PATH下所设置的路径下查找，如果没找的就会提示<code>command not found</code></p>
+<h3 id="find-搜索范围-搜索条件"><a href="#find-搜索范围-搜索条件" class="headerlink" title="find [搜索范围] [搜索条件]"></a>find [搜索范围] [搜索条件]</h3><p>选项：</p>
+<ul>
+<li>-name 按照文件名查找</li>
+<li>-iname 按照文件名不区分大小写查找</li>
+<li>-user 按照文件所有者查找</li>
+<li><p>-nouser 查找没有文件所有者的文件 有肯能是垃圾文件，又或者是U盘或者其他系统创建的文件等外来文件，又或者是系统 /sys 和/proc 目录下的重要文件</p>
+</li>
+<li><p>-group 按照文件所属的组查找</p>
+</li>
+<li><p>-mtime -n +n 按照文件更改时间查找 n天内 n那一天 n天前 同理还有 -atime -ctime  分别是访问时间和文件属性修改时间 与mtime 使用方法相同</p>
+</li>
+<li><p>-size 按照文件大小查找 单位:c字节,k 千字节, M 兆字节。 在查找中可用 -a(逻辑与) -o(逻辑或) 来表示多条件查找  </p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find / -size +20k -a -59k</div></pre></td></tr></table></figure>
+<p>查找根目录下大小在20k~59k之间的文件</p>
+<ul>
+<li>-inum 按照文件结点查找</li>
+</ul>
+<h4 id="find-name"><a href="#find-name" class="headerlink" title="find . -name"></a>find . -name</h4><p>通配符 ：</p>
+<ul>
+<li><code>*</code> 通配所有字符,不限长度</li>
+<li><code>[abc]</code> 通配 abc中任意一个字符</li>
+<li><code>[a-z]</code>   匹配a到z范围</li>
+<li><code>[^]</code>   逻辑非 ，不匹配中括号内的任意一个字符</li>
+<li><code>?</code> 匹配任意一个字符，注意是只是一个字符<br>在使用通配符时应该用引号将文件名括起来</li>
+</ul>
+<h3 id="find-搜索范围-搜索条件-exec-操作-注意-格式-‘-’-中间有个空格"><a href="#find-搜索范围-搜索条件-exec-操作-注意-格式-‘-’-中间有个空格" class="headerlink" title="find [搜索范围] [搜索条件] -exec [操作] {} \;(注意 格式 ‘{} \;’ 中间有个空格)"></a>find [搜索范围] [搜索条件] -exec [操作] {} \;(注意 格式 ‘{} \;’ 中间有个空格)</h3><p>对搜索的结果进行操作</p>
+<h3 id="grep-选项-“字符串”-文件名"><a href="#grep-选项-“字符串”-文件名" class="headerlink" title="grep [选项] “字符串” 文件名"></a>grep [选项] “字符串” 文件名</h3><p>寻找文件中含有 “字符串”的 文件<br>选项：</p>
+<ul>
+<li>-i 忽略大小写</li>
+<li>-v 排除字符<br>经常配合find命令</li>
+</ul>
+<h3 id="man-命令名"><a href="#man-命令名" class="headerlink" title="man 命令名"></a>man 命令名</h3><p>帮助命令<br>进入帮助文档 按’/‘后输入信息在帮助文档查找字符按’n’跳转下一个 ’shift+n’上一个<br>命令的帮助有级别</p>
+<ol>
+<li>查看命令的帮助</li>
+<li>查看内核可调用的函数的帮助</li>
+<li>查看函数和函数库的帮助</li>
+<li>查看特殊文件的帮助</li>
+<li>查看配置文件的帮助</li>
+<li>查看游戏的帮助</li>
+<li>查看其它杂项的帮助</li>
+<li>查看系统管理员可用的命令帮助</li>
+<li>查看和内核文件相关文件的帮助</li>
+</ol>
+<h4 id="man-f-命令"><a href="#man-f-命令" class="headerlink" title="man -f 命令"></a>man -f 命令</h4><p>查看命令有几个等级帮助</p>
+<h3 id="help-shell命令"><a href="#help-shell命令" class="headerlink" title="help shell命令"></a>help shell命令</h3><p>用于查看shell自带的命令如 <code>cd</code> 的帮助</p>
+<h3 id="info-命令"><a href="#info-命令" class="headerlink" title="info 命令"></a>info 命令</h3><p>用于查看命令文档</p>
+<ul>
+<li>回车 进入子帮助界面</li>
+<li>u 进入上层页面</li>
+<li>n 上一节</li>
+<li>p 下一节</li>
+<li>q 退出</li>
+</ul>
+<h2 id="压缩与解压缩"><a href="#压缩与解压缩" class="headerlink" title="压缩与解压缩"></a>压缩与解压缩</h2><ul>
+<li>常用的压缩格式 .zip .gz  .bz2  .tar.gz .tar.bz2</li>
+</ul>
+<h3 id="zip-压缩文件名-原文件"><a href="#zip-压缩文件名-原文件" class="headerlink" title="zip 压缩文件名 原文件"></a>zip 压缩文件名 原文件</h3><p>压缩指定文件</p>
+<h3 id="zip-r-压缩文件名-源目录"><a href="#zip-r-压缩文件名-源目录" class="headerlink" title="zip -r 压缩文件名 源目录"></a>zip -r 压缩文件名 源目录</h3><p>压缩指定文件夹</p>
+<h3 id="uzip-r-文件名"><a href="#uzip-r-文件名" class="headerlink" title="uzip -r 文件名"></a>uzip -r 文件名</h3><p>解压缩文件</p>
+<h3 id="gzip-源文件"><a href="#gzip-源文件" class="headerlink" title="gzip 源文件"></a>gzip 源文件</h3><p>压缩后原文件会消失</p>
+<h3 id="gzip-c-源文件-gt-压缩文件"><a href="#gzip-c-源文件-gt-压缩文件" class="headerlink" title="gzip -c 源文件 &gt; 压缩文件"></a>gzip -c 源文件 &gt; 压缩文件</h3><p>压缩后原文件保留</p>
+<h3 id="gzip-r-目录"><a href="#gzip-r-目录" class="headerlink" title="gzip -r 目录"></a>gzip -r 目录</h3><p>压缩目录下所有问价不可压缩所有文件</p>
+<h3 id="tar-cvf-打包文件名-源文件"><a href="#tar-cvf-打包文件名-源文件" class="headerlink" title="tar -cvf 打包文件名 源文件"></a>tar -cvf 打包文件名 源文件</h3><p>选项：</p>
+<ul>
+<li>-c 打包</li>
+<li>-v 显示过程</li>
+<li>-f 指定打包文件名</li>
+<li>-z 压缩为 .tar.gz </li>
+<li>-x 解压缩.tar.gz</li>
+</ul>
+<p><code>tar -cvf name.tar  name</code></p>
+<p><code>tar -xvf name.tar</code></p>
+<p><code>tar -zcvf name.tar.gz  name1</code></p>
+<p><code>tar -zxvf name.tar.gz</code></p>
+<h2 id="关机和重启"><a href="#关机和重启" class="headerlink" title="关机和重启"></a>关机和重启</h2><h3 id="shutdown-选-项-时间"><a href="#shutdown-选-项-时间" class="headerlink" title="shutdown [选  项] 时间"></a>shutdown [选  项] 时间</h3><p>选项:</p>
+<ul>
+<li>-r 重启</li>
+<li>-h 关机</li>
+</ul>
+<h4 id="其他关机命令"><a href="#其他关机命令" class="headerlink" title="其他关机命令"></a>其他关机命令</h4><ul>
+<li><code>halt</code></li>
+<li><code>poweroff</code></li>
+<li><code>init 0</code></li>
+</ul>
+<h3 id="runlevel"><a href="#runlevel" class="headerlink" title="runlevel"></a>runlevel</h3><p> 当前执行系统级别</p>
+<h3 id="mount"><a href="#mount" class="headerlink" title="mount"></a>mount</h3><p> 查看系统已经挂载的设备</p>
+<p> 挂载光驱<br> <code>mount /dev/sr0 /mnt</code><br> 将光盘挂载到/mnt目录下<br> <code>umount /mnt</code><br> 卸载光盘</p>
+<h2 id="Shell-是什么？"><a href="#Shell-是什么？" class="headerlink" title="Shell 是什么？"></a>Shell 是什么？</h2><ul>
+<li>Shell 是命令行解释器，他为用户提供一个向内核发送请求以便运行程序的界面系统级程序，用户可以通过Shell来启动、挂起、停止甚至编写一些程序。</li>
+<li>Shell还是一个功能强大的编程语言，易编写，易调试，灵活性较强、Shell解释执行脚本语言，在Shell中可以之间调用Linux系统命令</li>
+</ul>
+<h3 id="echo-指定的文字"><a href="#echo-指定的文字" class="headerlink" title="echo 指定的文字"></a>echo 指定的文字</h3><p>输出指定的文字</p>
+<h3 id="chome-xxx-数字执行权限-文件名"><a href="#chome-xxx-数字执行权限-文件名" class="headerlink" title="chome xxx(数字执行权限 文件名"></a>chome xxx(数字执行权限 文件名</h3><p>赋予执行脚本执行权限</p>
+<h3 id="shell-sh"><a href="#shell-sh" class="headerlink" title="./shell.sh"></a>./shell.sh</h3><p>赋予执行全权限后执行脚本文件</p>
+<h3 id="bash-shell-sh"><a href="#bash-shell-sh" class="headerlink" title="bash shell.sh"></a>bash shell.sh</h3><p>直接执行脚本</p>
+<h3 id="alias-命令-‘完全命令’"><a href="#alias-命令-‘完全命令’" class="headerlink" title="alias 命令=‘完全命令’"></a>alias 命令=‘完全命令’</h3><p>给完全命令起别名<br>比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">alias ll=&apos;ls -l&apos;</div></pre></td></tr></table></figure></p>
+<p>这样只是临时生效的若要永久生效要在根目录下<code>/.bashrc</code>文件下载使用<code>source /.bashrc</code>便会生效</p>
+<h3 id="ualias-命令"><a href="#ualias-命令" class="headerlink" title="ualias 命令"></a>ualias 命令</h3><p>取消别名 </p>
+<h2 id="常用快捷键"><a href="#常用快捷键" class="headerlink" title="常用快捷键"></a>常用快捷键</h2><ul>
+<li>ctrl+c 强制停止</li>
+<li>ctrl+l 清屏</li>
+<li>ctrl+a 光标移到的行首</li>
+<li>ctrl+e 光标移到到行尾</li>
+<li>ctrl+u 从当前删除到行首</li>
+<li>ctrl+z 命令进入后台运行</li>
+<li>ctrl+r 在历史命令中搜索</li>
+</ul>
+<h3 id="history-选项-历史命令或者保存文件"><a href="#history-选项-历史命令或者保存文件" class="headerlink" title="history [选项][历史命令或者保存文件]"></a>history [选项][历史命令或者保存文件]</h3><p>选项：</p>
+<ul>
+<li>-c 清空历史命令</li>
+<li>-w 把缓存的历史命令写入历史命令保存文件 ~/.bash_history</li>
+</ul>
+<h3 id="历史命令的调用"><a href="#历史命令的调用" class="headerlink" title="历史命令的调用"></a>历史命令的调用</h3><ul>
+<li>上下箭头遍历</li>
+<li><code>!123</code>执行第123条历史命令</li>
+<li><code>!!</code>重复执行上一条命令</li>
+<li><code>!xx</code>执行上一条以xx字符串开头的命令</li>
+</ul>
+<h3 id="gt-输出重定向"><a href="#gt-输出重定向" class="headerlink" title="&gt; 输出重定向"></a>&gt; 输出重定向</h3><p>将原本显示到显示器的内容以覆盖的方式保存到文件中<br><code>history &gt; log</code><br>将历史命令写入log文件中</p>
+<h4 id="2-gt-输出重定向包括命令本身错误"><a href="#2-gt-输出重定向包括命令本身错误" class="headerlink" title="2&gt; 输出重定向包括命令本身错误"></a>2&gt; 输出重定向包括命令本身错误</h4><h4 id="gt-gt-追加的方式保存"><a href="#gt-gt-追加的方式保存" class="headerlink" title="&gt;&gt; 追加的方式保存"></a>&gt;&gt; 追加的方式保存</h4><h4 id="2-gt-gt-追加的方式保存报错命令本身的错误保存"><a href="#2-gt-gt-追加的方式保存报错命令本身的错误保存" class="headerlink" title="2&gt;&gt; 追加的方式保存报错命令本身的错误保存"></a>2&gt;&gt; 追加的方式保存报错命令本身的错误保存</h4><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>符号</th>
+<th>作用</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>标准输出重定向</td>
+<td>命令 &gt; 文件</td>
+<td>以覆盖的方式，把命令正确的输出输出到指定的文件中</td>
+<td><code>history &gt; log</code></td>
+</tr>
+<tr>
+<td></td>
+<td>命令 &gt;&gt; 文件</td>
+<td>以追加的方式，把命令正确的输出输出到指定的文件中</td>
+<td><code>history &gt;&gt; log</code></td>
+</tr>
+<tr>
+<td>标准错误输出重定向</td>
+<td>命令 2&gt;文件</td>
+<td>以覆盖的方式，把命令错误的输出输出到指定的文件中</td>
+<td><code>history 2&gt;log</code></td>
+</tr>
+<tr>
+<td></td>
+<td>命令 2&gt;&gt;文件</td>
+<td>以追加的方式，把命令错误的输出输出到指定的文件中</td>
+<td><code>history 2&gt;&gt; log</code></td>
+</tr>
+<tr>
+<td>正确输出和错误输出同时保存</td>
+<td>命令 &gt; 文件 2&gt;&amp;1</td>
+<td>以覆盖的方式，把命令正确和错误的输出输出到指定的文件中</td>
+<td><code>history &gt;log 2&gt;&amp;1</code></td>
+</tr>
+<tr>
+<td></td>
+<td>命令 &gt;&gt; 文件 2&gt;&amp;1</td>
+<td>以追加的方式，把命令正确和错误的输出输出到指定的文件中</td>
+<td><code>history &gt;&gt;log 2&gt;&amp;1</code></td>
+</tr>
+<tr>
+<td></td>
+<td>命令 &amp;&gt;文件</td>
+<td>以覆盖的方式，把命令正确和错误的输出输出到指定的文件中</td>
+<td><code>history &amp;&gt;log</code></td>
+</tr>
+<tr>
+<td></td>
+<td>命令 &amp;&gt;&gt;文件</td>
+<td>以追加的方式，把命令正确和错误的输出输出到指定的文件中</td>
+<td><code>history &amp;&gt;&gt;log</code></td>
+</tr>
+<tr>
+<td></td>
+<td>命令&gt;&gt;文件1 2&gt;&gt;文件2</td>
+<td>把正确的输出保存到文件1中， 把错误的输出保存到文件2中</td>
+<td><code>ls -i file &gt;&gt;log1 2&gt;&gt;log2</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="多命令执行符"><a href="#多命令执行符" class="headerlink" title="多命令执行符"></a>多命令执行符</h2><h3 id=""><a href="#" class="headerlink" title=";"></a>;</h3><p>连接符</p>
+<h3 id="amp-amp"><a href="#amp-amp" class="headerlink" title="&amp;&amp;"></a>&amp;&amp;</h3><p>命令之间逻辑与</p>
+<h3 id="-1"><a href="#-1" class="headerlink" title="||"></a>||</h3><p>命令之间逻辑或</p>
+<h2 id="管道符"><a href="#管道符" class="headerlink" title="管道符"></a>管道符</h2><h3 id="命令1-命令2"><a href="#命令1-命令2" class="headerlink" title="命令1  | 命令2"></a>命令1  | 命令2</h3><p>命令1 的执行结果作为命令2 的操作对象</p>
+<h2 id="特殊符号"><a href="#特殊符号" class="headerlink" title="特殊符号"></a>特殊符号</h2><p><code>&#39; &#39;</code> 单引号单纯指字符串<br><code>&quot; &quot;</code> 双引号内  “$”、”<code>&quot; 和 &quot;\&quot;会有特殊意义，分别代表调用变量值，引用命令，转义符 ，其余无特殊意义</code> $()` 引用命令</p>
+
+    </div>
+
+    <div class="post-footer">   
+        <div>
+            
+        </div>
+        <div>
+            
+                版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
+</a>
+            
+        </div>  
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+</div>
+
+
+    <div id="comments">
+        
+    <div id="uyan_frame"></div>
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>主题Snippet v1.1.0版本即将上线，敬请期待~ <br>
+主题下载：<a href="https://github.com/shenliyang/hexo-theme-snippet"
+title="fork me" target="_blank">Snippet主题</a></p>
+        </div>
+    </div>
+
+        
+        
+
+        
+        
+    <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+
+
+        
+        
+
+        
+        
+    <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="https://weibo.com/u/2644928353/" class="fa" target="_blank">作者微博</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 
+                    <a href="http://www.shenliyang.com/" rel="nofollow">Snippet中文网</a>
+                </span> | 
+                <span>
+                    Powered by <a href="https://hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="https://shenliyang.github.io/" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <script src="/assets/highlight.pack.js?rev=@@hash"></script>
+  <script>
+    hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script>
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+</body>
+</html>
