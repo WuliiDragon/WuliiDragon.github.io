@@ -1,0 +1,317 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable"  content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    <link rel="dns-prefetch" href="//t11.baidu.com">
+    <!--SEO-->
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>小白看runtime（一）基本概念 | Hexo</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css?rev=9.12.0">
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+
+
+    
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header">
+    <div class="main-header-box">
+        <a class="branding" href="/" title="">
+            <img src="/img/header_logo.png" alt="Snippet 博客主题">
+        </a>
+        <h2 class="text-hide">Snippet主题</h2>
+        <img src="/img/header_logo.png" alt="Snippet 博客主题" class="hide">
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class=""><a href="/">首页</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="小白看runtime（一）基本概念">
+            
+            小白看runtime（一）基本概念
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <span> </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            null
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">2017/09/08</span>
+    </span>
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body">
+        <p>最近网上看了不少runtime的文章，自己总结一些也摘抄一些，避免过快的忘记</p>
+<p>###runtime<br>引入</p>
+<p>当我们在编写OC代码时，或者是在看博客的时候，或者在最初学习OC语法的时候，当去调用一个方法时不止一次的看到或者被告知这种行为不是调用方式而是在“发消息” 这个概念，但是很少或者没有去了解究竟是为什么。那究竟为什么把“方法调用”称作发消息呢？</p>
+<p>这就要从OC语言讲起，众所周知 OC是一门动态语言，什么是动态语言呢？</p>
+<blockquote>
+<p>动态语言，是指程序在运行时可以改变其结构：新的函数可以被引进，已有的函数可以被删除等在结构上的变化。比如众所周知的JavaScript便是一个动态语言。除此之外如Ruby、Python等也都属于动态语言，而C、C++等语言则不属于动态语言。</p>
+</blockquote>
+<p>既然有动态语言那肯定有静态语言：</p>
+<blockquote>
+<p>静态类型语言的类型判断是在运行前判断（如编译阶段），比如C#、java就是静态类型语言，静态类型语言为了达到多态会采取一些类型鉴别手段，如继承、接口，等特殊语法。</p>
+</blockquote>
+<p>所以不同于静态类型语言 OC总是想办法把一些决定工作从编译连接推迟到运行时，需要编译器和运行时系统 (runtime system) 一起来执行编译后的代码。</p>
+<p>C语言是一门静态语言，C语言是OC的基石，<code>运行时机制(runtime system)</code>不仅使得OC保持的C语言编译时的特性(如类型检查) 还借鉴了smalltalk机制为其添加了运行时机制也就是我们要介绍的runtime机制，runtime机制使得C语言具有了面对对象的特性，所以就有了OC。</p>
+<p>runtime是由C和汇编编写的，目前有两个版本 modern 和 legacy 现在使用的Object-C 2.0是modern版本的runtime系统，只能运行在iOS和OS X10.5之后的64位程序。而OS X较老的32位程序仍然采用Object-c 1 中legacy版本的runtime系统。</p>
+<p>总结来说 OC是动态类型语言许多事情在编译时无法确定，需要等在运行时。而造成这种现象的因为runtime机制的存在。</p>
+<p>学习runtime先从老生常谈的objc_msgSend函数谈起</p>
+<p>###objc_msgSend函数<br>新建一个Person类有实例方法和类方法</p>
+<ul>
+<li><code>-(void)instanceMethod;</code></li>
+<li><code>+(void)classMethod;</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">@interface Person : NSObject</div><div class="line">-(void)instanceMethod;</div><div class="line">+(void)classMethod;</div><div class="line">@end</div><div class="line">-(void)instanceMethod&#123;</div><div class="line">    NSLog(@&quot;instanceMethod is print&quot;);</div><div class="line"></div><div class="line">&#125;</div><div class="line">+(void)classMethod&#123;</div><div class="line">    NSLog(@&quot;classMethod is print&quot;);</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">int main(int argc, const char * argv[]) &#123;</div><div class="line">    @autoreleasepool &#123;</div><div class="line">        Person *per = [[Person alloc] init];</div><div class="line">        //很简单发送&apos;调用&apos;两个方法 分别是类方法和实例方法</div><div class="line">        [Person classMethod];</div><div class="line">        [per instanceMethod];</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    return 0;</div><div class="line">&#125;</div><div class="line">输出：</div><div class="line">2017-04-29 11:13:21.493311+0800 runtime[5163:1579843] classMethod is print</div><div class="line">2017-04-29 11:13:21.493433+0800 runtime[5163:1579843] instanceMethod is print</div></pre></td></tr></table></figure>
+<p>在main.m目录下 使用<code>clang -rewrite-objc main.m</code>编译mian.m文件生成main.cpp<br>摘抄一些重要的代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">int main(int argc, const char * argv[]) &#123;</div><div class="line">    /* @autoreleasepool */ &#123; __AtAutoreleasePool __autoreleasepool; </div><div class="line">        Person *per = ((Person *(*)(id, SEL))(void *)objc_msgSend)((id)((Person *(*)(id, SEL))(void *)objc_msgSend)((id)objc_getClass(&quot;Person&quot;), sel_registerName(&quot;alloc&quot;)), sel_registerName(&quot;init&quot;));</div><div class="line"></div><div class="line">        ((void (*)(id, SEL))(void *)objc_msgSend)((id)objc_getClass(&quot;Person&quot;), sel_registerName(&quot;classMethod&quot;));</div><div class="line">        ((void (*)(id, SEL))(void *)objc_msgSend)((id)per, sel_registerName(&quot;instanceMethod&quot;));</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们可以看到一共出现四次<code>objc_msgSend</code>函数alloc 和init时候以及’调用’我们自己设置的方法</p>
+<p>除去外衣我们只看函数的参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">objc_msgSend(objc_getClass(&quot;Person&quot;), sel_registerName(&quot;classMethod&quot;));  </div><div class="line"></div><div class="line">objc_msgSend(per, sel_registerName(&quot;instanceMethod&quot;));</div></pre></td></tr></table></figure>
+<p>在源码里面查看<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">id objc_msgSend(id self, SEL op, ...)</div></pre></td></tr></table></figure></p>
+<p>函数声明长这样子<br>第一个参数类型为id，大家对它都不陌生，它是一个指向类实例的指针<br>长这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">typedef struct objc_object *id;</div></pre></td></tr></table></figure></p>
+<p>学过C语言很快就能看出id是一个指向objc_object结构体的指针。<br>那我们就查看下结构体里有些什么呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">struct objc_object &#123;</div><div class="line">    Class isa  OBJC_ISA_AVAILABILITY;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>只有一个Class类型的指针</p>
+<p>那Class又是个什么鬼？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">typedef struct objc_class *Class;</div></pre></td></tr></table></figure></p>
+<p>原来是个指向objc_class结构体的指针啊<br>既然是个结构体那我们看下结构体有些什么<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">struct objc_class &#123;</div><div class="line">    Class isa  OBJC_ISA_AVAILABILITY;</div><div class="line"></div><div class="line">#if !__OBJC2__</div><div class="line">    Class super_class                                        OBJC2_UNAVAILABLE;</div><div class="line">    const char *name                                         OBJC2_UNAVAILABLE;</div><div class="line">    long version                                             OBJC2_UNAVAILABLE;</div><div class="line">    long info                                                OBJC2_UNAVAILABLE;</div><div class="line">    long instance_size                                       OBJC2_UNAVAILABLE;</div><div class="line">    struct objc_ivar_list *ivars                             OBJC2_UNAVAILABLE;</div><div class="line">    struct objc_method_list **methodLists                    OBJC2_UNAVAILABLE;</div><div class="line">    struct objc_cache *cache                                 OBJC2_UNAVAILABLE;</div><div class="line">    struct objc_protocol_list *protocols                     OBJC2_UNAVAILABLE;</div><div class="line">#endif</div><div class="line"></div><div class="line">&#125; OBJC2_UNAVAILABLE;</div></pre></td></tr></table></figure></p>
+<p>感觉东西好多而且加上这么多的概念有些乱啊</p>
+<p>我们就用简单的图来描述思路<br><img src="http://upload-images.jianshu.io/upload_images/1872052-76222435d30d1373.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>是不是思路清晰了许多？<br>我们着重来看下<code>methodLists</code><br>老规矩看看是个什么东西<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">struct objc_method_list &#123;</div><div class="line">    struct objc_method_list *obsolete                        OBJC2_UNAVAILABLE;</div><div class="line"></div><div class="line">    int method_count                                         OBJC2_UNAVAILABLE;</div><div class="line">#ifdef __LP64__</div><div class="line">    int space                                                OBJC2_UNAVAILABLE;</div><div class="line">#endif</div><div class="line">    /* variable length structure */</div><div class="line">    struct objc_method method_list[1]                        OBJC2_UNAVAILABLE;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>结构体<code>methodLists</code>是指向<code>objc_method_list</code>指针的指针。<br>其中的<code>struct objc_method method_list[1]</code><br>看看官方的描述为：长度可变的结构体数组<br>也就是说可以动态修改*methodLists的值来添加成员方法.</p>
+<p>简单的理解就是<code>methodLists</code>是方法的数组<br>里面存着类或者实例的方法</p>
+<p>来看看objc_method<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">struct objc_method &#123;</div><div class="line">    SEL method_name                                          OBJC2_UNAVAILABLE;</div><div class="line">    char *method_types                                       OBJC2_UNAVAILABLE;</div><div class="line">    IMP method_imp                                           OBJC2_UNAVAILABLE;</div><div class="line">&#125;                                                            OBJC2_UNAVAILABLE;</div></pre></td></tr></table></figure></p>
+<p>是不是非常眼熟？SEL <code>objc_msgSend</code>的第二个参数<br>来看看他的真面目</p>
+<p>###SEL<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">typedef struct objc_selector *SEL;</div></pre></td></tr></table></figure></p>
+<p>一个指向<code>objc_selector</code>结构体的指针<br>你可以理解为：SEL是一个仅仅包含方法名字的字符串</p>
+<p>###IMP</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">typedef id (*IMP)(id, SEL, ...);</div></pre></td></tr></table></figure>
+<p>恩他是个<a href="http://yulingtianxia.com/blog/2014/04/17/han-shu-zhi-zhen-yu-zhi-zhen-han-shu/" target="_blank" rel="external">函数指针</a>，它会指向一个函数。<br>当发送消息时，会执行一段代码，哪里去找那段代码呢？由IMP来指定。</p>
+<p>如果你思路清晰的话很快可以看出这货的参数和<code>objc_msgSend</code>的参数相同<br>确定一个IMP需要id和SEL。换句话说给我一个id，和一个SEL（方法名）就能确定一个方法的IMP（实现）。<br>到现在一堆的概念头都快炸了我们来完善一下思路结构图<br><img src="http://upload-images.jianshu.io/upload_images/1872052-63b3a45f8f474100.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="部分结构图"></p>
+<p>顺着思路是不是觉得思路清晰了一些，对结构有了一些直观认识。<br>但是有好多的东西都没有介绍 ，慢慢来，一口吃不成胖子。</p>
+<p><code>method_types</code>表示的是方法的<a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtTypeEncodings.html" target="_blank" rel="external">返回值和参数编码</a><br><img src="http://upload-images.jianshu.io/upload_images/1872052-fca126d96ab8331a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="返回值和参数编码"></p>
+<p>在<code>runtime.h</code>中我们可以找到一些有关于的函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">BOOL class_addMethod(Class cls, SEL name, IMP imp, </div><div class="line">                                 const char *types) </div><div class="line">IMP class_replaceMethod(Class cls, SEL name, IMP imp, </div><div class="line">                                    const char *types)</div></pre></td></tr></table></figure></p>
+<p>添加方法和替换方法<br>下面写一个简单例子来体会它存在的意义,手写要添加一个方法需要几个条件：方法名(SEL)、方法的实现地址(IMP)、方法所属的类(Class)。<br>幸运的是runtime API为我们提供了便捷的实现IMP的Block<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">IMP imp_implementationWithBlock(id block)</div></pre></td></tr></table></figure></p>
+<p>那我们就现在手动创建一个类并未其添加一个方法test，并尝重写description方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">int main(int argc, const char * argv[]) &#123;</div><div class="line">    @autoreleasepool &#123;</div><div class="line">        //创建继承自NSObject类的People类</div><div class="line">        Class People = objc_allocateClassPair([NSObject class], &quot;People&quot;, 0);</div><div class="line">        //将People类注册到runtime中</div><div class="line">        objc_registerClassPair(People);</div><div class="line">        //注册test: 方法选择器</div><div class="line">        SEL sel = sel_registerName(&quot;test:&quot;);</div><div class="line">        //函数实现</div><div class="line">        IMP imp = imp_implementationWithBlock(^(id this,id args)&#123;</div><div class="line">            NSLog(@&quot;方法的调用者为 %@&quot;,this);</div><div class="line">            NSLog(@&quot;参数为 %@&quot;,args);</div><div class="line">            return @&quot;返回值测试&quot;;</div><div class="line">        &#125;);</div><div class="line">        </div><div class="line">        //向People类中添加 test:方法;函数签名为@@:@,</div><div class="line">        //    第一个@表示返回值类型为id,</div><div class="line">        //    第二个@表示的是函数的调用者类型,</div><div class="line">        //    第三个:表示 SEL</div><div class="line">        //    第四个@表示需要一个id类型的参数</div><div class="line">        class_addMethod(People, sel, imp, &quot;@@:@&quot;);</div><div class="line">        //替换People从NSObject类中继承而来的description方法</div><div class="line">        class_replaceMethod(People,@selector(description), imp_implementationWithBlock(^NSString*(id this,...)&#123;</div><div class="line">            return @&quot;我是Person类的对象&quot;;&#125;),</div><div class="line">                            &quot;@@:&quot;);</div><div class="line">        </div><div class="line">        //完成 [[People alloc]init];</div><div class="line">        id p1 = objc_msgSend(objc_msgSend(People, @selector(alloc)),@selector(init));</div><div class="line">        //调用p1的sel选择器的方法,并传递@&quot;???&quot;作为参数</div><div class="line">        id result = objc_msgSend(p1, sel,@&quot;???&quot;);</div><div class="line">        //输出sel方法的返回值</div><div class="line">        NSLog(@&quot;sel 方法的返回值为 ： %@&quot;,result);</div><div class="line">        </div><div class="line">        //获取People类中实现的方法列表</div><div class="line">        NSLog(@&quot;输出People类中实现的方法列表&quot;);</div><div class="line">        unsigned int methodCount;</div><div class="line">        Method * methods = class_copyMethodList(People, &amp;methodCount);</div><div class="line">        for (int i = 0; i&lt;methodCount; i++) &#123;</div><div class="line">            NSLog(@&quot;方法名称:%s&quot;,sel_getName(method_getName(methods[i])));</div><div class="line">            NSLog(@&quot;方法Types:%s&quot;,method_getDescription(methods[i])-&gt;types);</div><div class="line">        &#125;</div><div class="line">        free(methods);</div><div class="line">   </div><div class="line">    &#125;</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>参考：<br><a href="[http://www.jianshu.com/p/c0157110caa5">http://www.jianshu.com/p/c0157110caa5</a><br><a href="http://yulingtianxia.com/blog/2014/11/05/objective-c-runtime/" target="_blank" rel="external">http://yulingtianxia.com/blog/2014/11/05/objective-c-runtime/</a></p>
+
+    </div>
+
+    <div class="post-footer">   
+        <div>
+            
+        </div>
+        <div>
+            
+                版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
+</a>
+            
+        </div>  
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+        <a href="/2017/09/08/linux/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
+    
+</div>
+
+
+    <div id="comments">
+        
+    <div id="uyan_frame"></div>
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>主题Snippet v1.1.0版本即将上线，敬请期待~ <br>
+主题下载：<a href="https://github.com/shenliyang/hexo-theme-snippet"
+title="fork me" target="_blank">Snippet主题</a></p>
+        </div>
+    </div>
+
+        
+        
+
+        
+        
+    <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">2</span></li></ul>
+    </div>
+
+
+        
+        
+
+        
+        
+    <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="https://weibo.com/u/2644928353/" class="fa" target="_blank">作者微博</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 
+                    <a href="http://www.shenliyang.com/" rel="nofollow">Snippet中文网</a>
+                </span> | 
+                <span>
+                    Powered by <a href="https://hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="https://shenliyang.github.io/" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <script src="/assets/highlight.pack.js?rev=@@hash"></script>
+  <script>
+    hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script>
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+</body>
+</html>
