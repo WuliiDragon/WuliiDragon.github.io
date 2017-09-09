@@ -1,139 +1,84 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<!-- Head tag -->
 <head>
-    <!--Setting-->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    <meta name="renderer" content="webkit|ie-comp|ie-stand">
-    <meta name="apple-mobile-web-app-capable"  content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="format-detection" content="telephone=no,email=no">
-    <link rel="dns-prefetch" href="//t11.baidu.com">
-    <!--SEO-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!--Description-->
+    
+        <meta name="description" content="ls命令
+-a 显示所有文件包括隐藏文件
+-l 文件的详细信息
+-d  查看目录的属性
+-h 按照标准的KB,MB,GB等显示文件大小
+-i 显示inode
 
-
-<meta name="robots" content="all" />
-<meta name="google" content="all" />
-<meta name="googlebot" content="all" />
-<meta name="verify" content="all" />
-    <!--Title-->
-
-
-<title>Linux 入门总结 | Blog</title>
-
-
-    <link rel="alternate" href="/atom.xml" title="Blog" type="application/atom+xml">
-
-
-    <link rel="icon" href="/favicon.ico">
-
+这些命令不加文件默认会操作当前文件夹下所有文件
+所有命令都是`命令 [选项] [参数] ‘这种格式 []代表可选
+根目录\‘/boot’ 系">
     
 
-
-
-
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css?rev=9.12.0">
-
-
-<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4">
-<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="/css/style.css?rev=@@hash">
-
-
-
-
+    <!--Author-->
+    
+        <meta name="author" content="Dragon">
     
 
+    <!-- Title -->
+    
+    <title>Linux 入门总结 | Dragon的博客</title>
 
-    
-    
+    <!-- Bootstrap Core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Serif:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 
-
-<!--[if lte IE 8]>
-<style>
-    html{ font-size: 1em }
-</style>
-<![endif]-->
-<!--[if lte IE 9]>
-<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
-<![endif]-->
-
 <body>
-    <header class="main-header">
-    <div class="main-header-box">
-        <a class="branding" href="/" title="">
-            <img src="/img/header_logo.png" alt="Snippet 博客主题">
-        </a>
-        <h2 class="text-hide">Snippet主题</h2>
-        <img src="/img/header_logo.png" alt="Snippet 博客主题" class="hide">
-    </div>
-</header>
-    <nav class="main-navigation">
+
+    <!-- Content -->
+    <section class="article-container">
+<!-- Back Home -->
+<a class="nav-back" href="/">
+    <i class="fa fa-puzzle-piece"></i>
+</a>
+
+<!-- Page Header -->
+<header class="intro-header">
     <div class="container">
         <div class="row">
-            <div class="col-sm-12">
-                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
-                    <span class="sr-only">Toggle navigation</span>
-                    <i class="fa fa-bars"></i>
-                    </span>
-                </div>
-                <div class="collapse navbar-collapse" id="main-menu">
-                    <ul class="menu">
-                        
-                            <li role="presentation" class=""><a href="/">首页</a></li>
-                        
-                    </ul>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Linux 入门总结</h1>
                 </div>
             </div>
         </div>
     </div>
-</nav>
-    <section class="content-wrap">
-        <div class="container">
-            <div class="row">
-                <main class="col-md-8 main-content">
-                    <p id="process"></p>
-<article class="post">
-    <div class="post-head">
-        <h1 id="Linux 入门总结">
-            
-            Linux 入门总结
-            
-        </h1>
-        <div class="post-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-        <i class="fa fa-folder-open-o"></i>
-        <span> </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            null
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta">2017/09/08</span>
-    </span>
-</div>
+</header>
 
-            
-            
-    </div>
-    
-    <div class="post-body">
-        <p><img src="/images/linux.png" alt="Linux"></p>
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Main Content -->
+            <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p><img src="/images/linux.png" alt="Linux"></p>
 <h3 id="ls命令"><a href="#ls命令" class="headerlink" title="ls命令"></a>ls命令</h3><ul>
 <li>-a 显示所有文件包括隐藏文件</li>
 <li>-l 文件的详细信息</li>
@@ -296,7 +241,7 @@
 <li>-c 打包</li>
 <li>-v 显示过程</li>
 <li>-f 指定打包文件名</li>
-<li>-z 压缩为 .tar.gz </li>
+<li>-z 压缩为 .tar.gz</li>
 <li>-x 解压缩.tar.gz</li>
 </ul>
 <p><code>tar -cvf name.tar  name</code></p>
@@ -326,7 +271,7 @@
 <h3 id="bash-shell-sh"><a href="#bash-shell-sh" class="headerlink" title="bash shell.sh"></a>bash shell.sh</h3><p>直接执行脚本</p>
 <h3 id="alias-命令-‘完全命令’"><a href="#alias-命令-‘完全命令’" class="headerlink" title="alias 命令=‘完全命令’"></a>alias 命令=‘完全命令’</h3><p>给完全命令起别名<br>比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">alias ll=&apos;ls -l&apos;</div></pre></td></tr></table></figure></p>
 <p>这样只是临时生效的若要永久生效要在根目录下<code>/.bashrc</code>文件下载使用<code>source /.bashrc</code>便会生效</p>
-<h3 id="ualias-命令"><a href="#ualias-命令" class="headerlink" title="ualias 命令"></a>ualias 命令</h3><p>取消别名 </p>
+<h3 id="ualias-命令"><a href="#ualias-命令" class="headerlink" title="ualias 命令"></a>ualias 命令</h3><p>取消别名</p>
 <h2 id="常用快捷键"><a href="#常用快捷键" class="headerlink" title="常用快捷键"></a>常用快捷键</h2><ul>
 <li>ctrl+c 强制停止</li>
 <li>ctrl+l 清屏</li>
@@ -420,130 +365,44 @@
 <h2 id="管道符"><a href="#管道符" class="headerlink" title="管道符"></a>管道符</h2><h3 id="命令1-命令2"><a href="#命令1-命令2" class="headerlink" title="命令1  | 命令2"></a>命令1  | 命令2</h3><p>命令1 的执行结果作为命令2 的操作对象</p>
 <h2 id="特殊符号"><a href="#特殊符号" class="headerlink" title="特殊符号"></a>特殊符号</h2><p><code>&#39; &#39;</code> 单引号单纯指字符串<br><code>&quot; &quot;</code> 双引号内  “$”、”<code>&quot; 和 &quot;\&quot;会有特殊意义，分别代表调用变量值，引用命令，转义符 ，其余无特殊意义</code> $()` 引用命令</p>
 
-    </div>
+ 
+                <!-- Meta -->
+                <div class="post-meta">
+                    <hr>
+                    <br>
+                    <div class="post-tags">
+                        
+                    </div>
+                    <div class="post-date">
+                        2017 年 09 月 08 日
+                    </div>
+                </div>
+            </div>
 
-    <div class="post-footer">   
-        <div>
-            
+            <!-- Comments -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- Disqus Comments -->
+
+
+            </div>
         </div>
-        <div>
-            
-                版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
-知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
-</a>
-            
-        </div>  
     </div>
 </article>
+</section>
 
-<div class="article-nav prev-next-wrap clearfix">
+    <!-- Scripts -->
+    <!-- jQuery -->
+<script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+	console.log('Hexo-theme-hollow designed by zchen9 🙋 © 2015-' + (new Date()).getFullYear());
+</script>
+
+    <!-- Google Analytics -->
     
-        <a href="/2017/09/08/回朔法/" class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a>
-    
-    
-</div>
-
-
-    <div id="comments">
-        
-    <div id="uyan_frame"></div>
-    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
-
-
-
-
-
-
-
-
-    </div>
-
-
-
-
-
-                </main>
-                
-    <aside class="col-md-4 sidebar">
-        
-        
-    <div class="widget notification">
-        <h3 class="title">网站公告</h3>
-        <div>
-            <p>主题Snippet v1.1.0版本即将上线，敬请期待~ <br>
-主题下载：<a href="https://github.com/shenliyang/hexo-theme-snippet"
-title="fork me" target="_blank">Snippet主题</a></p>
-        </div>
-    </div>
-
-        
-        
-
-        
-        
-    <div class="widget">
-      <h3 class="title">归档</h3>
-        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">4</span></li></ul>
-    </div>
-
-
-        
-        
-
-        
-        
-    <div class="widget">
-        <h3 class="title">友链</h3>
-        <div class="content friends-link">
-        
-            <a href="https://weibo.com/u/2644928353/" class="fa" target="_blank">作者微博</a>
-        
-        </div>
-    </div>
-
-
-        
-    </aside>
-
-            </div>
-        </div>
-    </section>
-    <footer class="main-footer">
-    <div class="container">
-        <div class="row">
-        </div>
-    </div>
-</footer>
-
-
-
-
-
-
-    <div class="copyright">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12"> 
-                <span>Copyright &copy; 
-                    <a href="http://www.shenliyang.com/" rel="nofollow">Snippet中文网</a>
-                </span> | 
-                <span>
-                    Powered by <a href="https://hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
-                </span> | 
-                <span>
-                    Theme by <a href="https://shenliyang.github.io/" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
-                </span>
-            </div>
-        </div>
-    </div>
-</div>
-
-  <script src="/assets/highlight.pack.js?rev=@@hash"></script>
-  <script>
-    hljs.initHighlightingOnLoad(); //初始化代码高亮 
-  </script>
-
-<script src="/js/app.js?rev=@@hash"></script>
 
 </body>
+
 </html>

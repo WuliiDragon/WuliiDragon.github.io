@@ -1,139 +1,78 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<!-- Head tag -->
 <head>
-    <!--Setting-->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    <meta name="renderer" content="webkit|ie-comp|ie-stand">
-    <meta name="apple-mobile-web-app-capable"  content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="format-detection" content="telephone=no,email=no">
-    <link rel="dns-prefetch" href="//t11.baidu.com">
-    <!--SEO-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!--Description-->
+    
+        <meta name="description" content="回溯：递归的一种，或者说是通过递归这种代码结构来实现回溯这个目的。回溯法可以被认为是一个有过剪枝的DFS过程。把问题分解成若干步骤 并递归求解时如果当前步骤没有合法选择 则函数返回上一级递归调用  这种现象叫做回朔
 
-
-<meta name="robots" content="all" />
-<meta name="google" content="all" />
-<meta name="googlebot" content="all" />
-<meta name="verify" content="all" />
-    <!--Title-->
-
-
-<title>回朔法 | Blog</title>
-
-
-    <link rel="alternate" href="/atom.xml" title="Blog" type="application/atom+xml">
-
-
-    <link rel="icon" href="/favicon.ico">
-
+回溯的一般结构：
+1234567891011121314void dfs(int ">
     
 
-
-
-
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css?rev=9.12.0">
-
-
-<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4">
-<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="/css/style.css?rev=@@hash">
-
-
-
-
+    <!--Author-->
+    
+        <meta name="author" content="Dragon">
     
 
+    <!-- Title -->
+    
+    <title>回朔法 | Dragon的博客</title>
 
-    
-    
+    <!-- Bootstrap Core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Serif:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 
-
-<!--[if lte IE 8]>
-<style>
-    html{ font-size: 1em }
-</style>
-<![endif]-->
-<!--[if lte IE 9]>
-<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
-<![endif]-->
-
 <body>
-    <header class="main-header">
-    <div class="main-header-box">
-        <a class="branding" href="/" title="">
-            <img src="/img/header_logo.png" alt="Snippet 博客主题">
-        </a>
-        <h2 class="text-hide">Snippet主题</h2>
-        <img src="/img/header_logo.png" alt="Snippet 博客主题" class="hide">
-    </div>
-</header>
-    <nav class="main-navigation">
+
+    <!-- Content -->
+    <section class="article-container">
+<!-- Back Home -->
+<a class="nav-back" href="/">
+    <i class="fa fa-puzzle-piece"></i>
+</a>
+
+<!-- Page Header -->
+<header class="intro-header">
     <div class="container">
         <div class="row">
-            <div class="col-sm-12">
-                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
-                    <span class="sr-only">Toggle navigation</span>
-                    <i class="fa fa-bars"></i>
-                    </span>
-                </div>
-                <div class="collapse navbar-collapse" id="main-menu">
-                    <ul class="menu">
-                        
-                            <li role="presentation" class=""><a href="/">首页</a></li>
-                        
-                    </ul>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>回朔法</h1>
                 </div>
             </div>
         </div>
     </div>
-</nav>
-    <section class="content-wrap">
-        <div class="container">
-            <div class="row">
-                <main class="col-md-8 main-content">
-                    <p id="process"></p>
-<article class="post">
-    <div class="post-head">
-        <h1 id="回朔法">
-            
-            回朔法
-            
-        </h1>
-        <div class="post-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-        <i class="fa fa-folder-open-o"></i>
-        <span> </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            null
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta">2017/09/08</span>
-    </span>
-</div>
+</header>
 
-            
-            
-    </div>
-    
-    <div class="post-body">
-        <blockquote>
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Main Content -->
+            <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <blockquote>
 <p>回溯：递归的一种，或者说是通过递归这种代码结构来实现回溯这个目的。回溯法可以被认为是一个有过剪枝的DFS过程。把问题分解成若干步骤 并递归求解时如果当前步骤没有合法选择 则函数返回上一级递归调用  这种现象叫做回朔</p>
 </blockquote>
 <p>回溯的一般结构：</p>
@@ -141,133 +80,46 @@
 <blockquote>
 <p> <a href="http://baike.baidu.com/link?url=V_Dtqbz9q_8U8T5O7DfaDgLghms69ana3sqNXnmFxsNNrSsTldwKQKsgOlg-gDNy49TYCDsHhnTAz76npXdi9M079iYSSgZmIbkndJTWYIFh6LQkY_Ipc_o-VZHt1VD5FpRuK9X1ozxr367yjENWC_" target="_blank" rel="external">8 皇后问题</a></p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">#include &quot;stdio.h&quot;</div><div class="line">#define N 8</div><div class="line">int n = N;</div><div class="line">int ans = 0;</div><div class="line">int C[N];</div><div class="line">void f(int cur)&#123;</div><div class="line">    if(cur == n)	&#123;</div><div class="line">        ans++;</div><div class="line">    </div><div class="line">        for( int i = 0; i&lt;N ;i++)&#123;</div><div class="line">            int x = C[i];</div><div class="line">            for (int j = 0; j &lt; N; j++) &#123;</div><div class="line">                if(x == j)&#123; printf(&quot;1 &quot;);continue;&#125;</div><div class="line">                printf(&quot;0 &quot;);</div><div class="line">            &#125;</div><div class="line">            printf(&quot;\n&quot;);</div><div class="line">        &#125;</div><div class="line">    printf(&quot;\n&quot;);printf(&quot;\n&quot;);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    for(int i = 0;i &lt; n; i++)&#123;</div><div class="line">        int ok = 1;</div><div class="line">        C[cur] = i	; //cur 行 放 第 i 列</div><div class="line">        for(int j = 0; j &lt; cur; j++)//列数在变     /****对于坐标(x,y)与（m,n）若在主对角线上 y-x = n-m 副对角线 y+x = m+n *****/</div><div class="line">            if( C[cur] == C[j]/*是否同一列*/ || cur - C[cur] == j - C[j] /*检查主对角线*/ || cur + C[cur] == j + C[j] /*副对角线*/)&#123;//按行放置不用检查行</div><div class="line">                ok = 0; break;//不符合</div><div class="line">        &#125;</div><div class="line">        if(ok) f(cur+1);//若合法 继续 下一行放置</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main()&#123;</div><div class="line">    f(0);</div><div class="line">    printf(&quot;%d\n&quot;,ans);</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-    </div>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">#include &quot;stdio.h&quot;</div><div class="line">#define N 8</div><div class="line">int n = N;</div><div class="line">int ans = 0;</div><div class="line">int C[N];</div><div class="line">void f(int cur)&#123;</div><div class="line">    if(cur == n)	&#123;</div><div class="line">        ans++;</div><div class="line"></div><div class="line">        for( int i = 0; i&lt;N ;i++)&#123;</div><div class="line">            int x = C[i];</div><div class="line">            for (int j = 0; j &lt; N; j++) &#123;</div><div class="line">                if(x == j)&#123; printf(&quot;1 &quot;);continue;&#125;</div><div class="line">                printf(&quot;0 &quot;);</div><div class="line">            &#125;</div><div class="line">            printf(&quot;\n&quot;);</div><div class="line">        &#125;</div><div class="line">    printf(&quot;\n&quot;);printf(&quot;\n&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    for(int i = 0;i &lt; n; i++)&#123;</div><div class="line">        int ok = 1;</div><div class="line">        C[cur] = i	; //cur 行 放 第 i 列</div><div class="line">        for(int j = 0; j &lt; cur; j++)//列数在变     /****对于坐标(x,y)与（m,n）若在主对角线上 y-x = n-m 副对角线 y+x = m+n *****/</div><div class="line">            if( C[cur] == C[j]/*是否同一列*/ || cur - C[cur] == j - C[j] /*检查主对角线*/ || cur + C[cur] == j + C[j] /*副对角线*/)&#123;//按行放置不用检查行</div><div class="line">                ok = 0; break;//不符合</div><div class="line">        &#125;</div><div class="line">        if(ok) f(cur+1);//若合法 继续 下一行放置</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main()&#123;</div><div class="line">    f(0);</div><div class="line">    printf(&quot;%d\n&quot;,ans);</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
-    <div class="post-footer">   
-        <div>
-            
+ 
+                <!-- Meta -->
+                <div class="post-meta">
+                    <hr>
+                    <br>
+                    <div class="post-tags">
+                        
+                    </div>
+                    <div class="post-date">
+                        2017 年 09 月 08 日
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comments -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- Disqus Comments -->
+
+
+            </div>
         </div>
-        <div>
-            
-                版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
-知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
-</a>
-            
-        </div>  
     </div>
 </article>
+</section>
 
-<div class="article-nav prev-next-wrap clearfix">
+    <!-- Scripts -->
+    <!-- jQuery -->
+<script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+	console.log('Hexo-theme-hollow designed by zchen9 🙋 © 2015-' + (new Date()).getFullYear());
+</script>
+
+    <!-- Google Analytics -->
     
-        <a href="/2017/09/08/小白看runtime（一）基本概念/" class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a>
-    
-    
-        <a href="/2017/09/08/linux/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
-    
-</div>
-
-
-    <div id="comments">
-        
-    <div id="uyan_frame"></div>
-    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
-
-
-
-
-
-
-
-
-    </div>
-
-
-
-
-
-                </main>
-                
-    <aside class="col-md-4 sidebar">
-        
-        
-    <div class="widget notification">
-        <h3 class="title">网站公告</h3>
-        <div>
-            <p>主题Snippet v1.1.0版本即将上线，敬请期待~ <br>
-主题下载：<a href="https://github.com/shenliyang/hexo-theme-snippet"
-title="fork me" target="_blank">Snippet主题</a></p>
-        </div>
-    </div>
-
-        
-        
-
-        
-        
-    <div class="widget">
-      <h3 class="title">归档</h3>
-        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">4</span></li></ul>
-    </div>
-
-
-        
-        
-
-        
-        
-    <div class="widget">
-        <h3 class="title">友链</h3>
-        <div class="content friends-link">
-        
-            <a href="https://weibo.com/u/2644928353/" class="fa" target="_blank">作者微博</a>
-        
-        </div>
-    </div>
-
-
-        
-    </aside>
-
-            </div>
-        </div>
-    </section>
-    <footer class="main-footer">
-    <div class="container">
-        <div class="row">
-        </div>
-    </div>
-</footer>
-
-
-
-
-
-
-    <div class="copyright">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12"> 
-                <span>Copyright &copy; 
-                    <a href="http://www.shenliyang.com/" rel="nofollow">Snippet中文网</a>
-                </span> | 
-                <span>
-                    Powered by <a href="https://hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
-                </span> | 
-                <span>
-                    Theme by <a href="https://shenliyang.github.io/" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
-                </span>
-            </div>
-        </div>
-    </div>
-</div>
-
-  <script src="/assets/highlight.pack.js?rev=@@hash"></script>
-  <script>
-    hljs.initHighlightingOnLoad(); //初始化代码高亮 
-  </script>
-
-<script src="/js/app.js?rev=@@hash"></script>
 
 </body>
+
 </html>
