@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="##MySQL的数据类型：
+字符串类型
+
+
+字符串类型
+字节大小
+描述及存储需求
+
+
+
+
+    CHAR
+0-255字节
+定长字符串
+
+
+    VARCHAR
+0-255字节
+变长字符串
+
+
+    TINYBLOB
+0-255字节
+不超过 255 个字符的二进制字符串
+
+
+    TINYTE">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Dragon">
+    
+
+    <!-- Title -->
+    
+    <title>MySQL基础命令总结（一） | Dragon的博客</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Serif:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <!-- Content -->
+    <section class="article-container">
+<!-- Back Home -->
+<a class="nav-back" href="/">
+    <i class="fa fa-puzzle-piece"></i>
+</a>
+
+<!-- Page Header -->
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>MySQL基础命令总结（一）</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Main Content -->
+            <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>##MySQL的数据类型：</p>
+<h4 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h4><table>
+<thead>
+<tr>
+<th>字符串类型</th>
+<th>字节大小</th>
+<th>描述及存储需求</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>    CHAR</td>
+<td>0-255字节</td>
+<td>定长字符串</td>
+</tr>
+<tr>
+<td>    VARCHAR</td>
+<td>0-255字节</td>
+<td>变长字符串</td>
+</tr>
+<tr>
+<td>    TINYBLOB</td>
+<td>0-255字节</td>
+<td>不超过 255 个字符的二进制字符串</td>
+</tr>
+<tr>
+<td>    TINYTEXT</td>
+<td>0-255字节</td>
+<td>短文本字符串</td>
+</tr>
+<tr>
+<td>    BLOB</td>
+<td>0-65535字节</td>
+<td>二进制形式的长文本数据</td>
+</tr>
+<tr>
+<td>    TEXT</td>
+<td>0-65535字节</td>
+<td>长文本数据</td>
+</tr>
+<tr>
+<td>    MEDIUMBLOB</td>
+<td>0-16 777 215字节</td>
+<td>二进制形式的中等长度文本数据</td>
+</tr>
+<tr>
+<td>    MEDIUMTEXT</td>
+<td>0-16 777 215字节</td>
+<td>中等长度文本数据</td>
+</tr>
+<tr>
+<td>    LOGNGBLOB</td>
+<td>0-4 294 967 295字节</td>
+<td>二进制形式的极大文本数据</td>
+</tr>
+<tr>
+<td>    LONGTEXT</td>
+<td>0-4 294 967 295字节</td>
+<td>极大文本数据</td>
+</tr>
+<tr>
+<td>    VARBINARY(M)</td>
+<td></td>
+<td>允许长度0-M个字节的定长字节符串，值的长度+1个字节</td>
+</tr>
+<tr>
+<td>    BINARY(M)</td>
+<td>M</td>
+<td>允许长度0-M个字节的定长字节符串</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h5 id="CHAR和VARCHAR类型"><a href="#CHAR和VARCHAR类型" class="headerlink" title="CHAR和VARCHAR类型"></a>CHAR和VARCHAR类型</h5><ul>
+<li><p>CHAR 类型用于定长字符串，并且必须在圆括号内用一个大小修饰符来定义。这个大小修饰符的范围从 0-255。比指定长度大的值将被截短，而比指定长度小的值将会用空格作填补。CHAR 类型可以使用 BINARY 修饰符。当用于比较运算时，这个修饰符使 CHAR 以二进制方式参于运算，而不是以传统的区分大小写的方式。</p>
+</li>
+<li><p>VARCHAR 类型的一个变体是 VARCHAR 类型。它是一种可变长度的字符串类型，并且也必须带有一个范围在 0-255 之间的指示器。CHAR 和 VARCHGAR 不同之处在于 MYSQL 数据库处理这个指示器的方式：CHAR 把这个大小视为值的大小，不长度不足的情况下就用空格补足。而 VARCHAR 类型把它视为最大值并且只使用存储字符串实际需要的长度(增加一个额外字节来存储字符串本身的长度)来存储值。所以短于指示器长度的 VARCHAR 类型不会被空格填补，但长于指示器的值仍然会被截短。因为 VARCHAR 类型可以根据实际内容动态改变存储值的长度，所以在不能确定字段需要多少字符时使用 VARCHAR 类型可以大大地节约磁盘空间、提高存储效率。<br>VARCHAR 类型在使用 BINARY 修饰符时与 CHAR 类型完全相同。</p>
+</li>
+</ul>
+<h5 id="TEXT和BLOB-类型"><a href="#TEXT和BLOB-类型" class="headerlink" title="TEXT和BLOB 类型:"></a>TEXT和BLOB 类型:</h5><p>对于字段长度要求超过 255 个的情况下，MySQL 提供了 TEXT 和 BLOB 两种类型。根据存储数据的大小，它们都有不同的子类型。这些大型的数据用于存储文本块或图像、声音文件等二进制数据类型。</p>
+<p>TEXT 和 BLOB 类型在分类和比较上存在区别。BLOB 类型区分大小写，而 TEXT 不区分大小写。大小修饰符不用于各种 BLOB 和 TEXT 子类型。比指定类型支持的最大范围大的值将被自动截短。</p>
+<h4 id="INT-类型"><a href="#INT-类型" class="headerlink" title="INT 类型:"></a>INT 类型:</h4><table>
+<thead>
+<tr>
+<th>整数类型</th>
+<th>字节</th>
+<th>范围（有符号）</th>
+<th>范围（无符号）</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TINYINT</td>
+<td>1字节</td>
+<td>(-128，127)</td>
+<td>(0，255)</td>
+<td>小整数值</td>
+</tr>
+<tr>
+<td>SMALLINT</td>
+<td>2字节</td>
+<td>(-32 768，32 767)</td>
+<td>(0，65 535)</td>
+<td>大整数值</td>
+</tr>
+<tr>
+<td>MEDIUMINT</td>
+<td>3字节</td>
+<td>(-8 388 608，8 388 607)</td>
+<td>(0，16 777 215)</td>
+<td>大整数值</td>
+</tr>
+<tr>
+<td>INT或INTEGER</td>
+<td>4字节</td>
+<td>(-2 147 483 648，2 147 483 647)</td>
+<td>(0，4 294 967 295)</td>
+<td>大整数值</td>
+</tr>
+<tr>
+<td>BIGINT</td>
+<td>8字节</td>
+<td>(-9 233 372 036 854 775 808，9 223 372 036 854 775 807)</td>
+<td>(0，18 446 744 073 709 551 615)</td>
+<td>极大整数值</td>
+</tr>
+<tr>
+<td>FLOAT</td>
+<td>4字节</td>
+<td>(-3.402 823 466 E+38，1.175 494 351 E-38)，0，(1.175 494 351 E-38，3.402 823 466 351 E+38) 0，</td>
+<td>(1.175 494 351 E-38，3.402 823 466 E+38)</td>
+<td>单精度浮点数值</td>
+</tr>
+<tr>
+<td>DOUBLE</td>
+<td>8字节</td>
+<td>(1.797 693 134 862 315 7 E+308，2.225 073 858 507 201 4 E-308)，0，(2.225 073 858 507 201 4 E-308，1.797 693 134 862 315 7 E+308)</td>
+<td>0，(2.225 073 858 507 201 4 E-308，1.797 693 134 862 315 7 E+308)</td>
+<td>双精度浮点数值</td>
+</tr>
+<tr>
+<td>DECIMAL</td>
+<td>对DECIMAL(M,D) ，如果M&gt;D，为M+2否则为D+2</td>
+<td>依赖于M和D的值</td>
+<td>依赖于M和D的值</td>
+<td>小数值</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>在 MySQL 中支持的 5 个主要整数类型是 　</p>
+<ul>
+<li>TINYINT</li>
+<li>SMALLINT</li>
+<li>MEDIUMINT，</li>
+<li>INT</li>
+<li>BIGINT</li>
+</ul>
+<p>这些类型在很大程度上是相同的，只有它们存储的值的大小是不相同的。<br>MySQL 以一个可选的显示宽度指示器的形式对 SQL 标准进行扩展，这样当从数据库检索一个值时，可以把这个值加长到指定的长度。例如，指定一个字段的类型为 INT(6)，就可以保证所包含数字少于 6 个的值从数据库中检索出来时能够自动地用空格填充。需要注意的是，使用一个宽度指示器不会影响字段的大小和它可以存储的值的范围。<br>万一我们需要对一个字段存储一个超出许可范围的数字，MySQL 会根据允许范围最接近它的一端截短后再进行存储。还有一个比较特别的地方是，MySQL 会在不合规定的值插入表前自动修改为 0。</p>
+<ul>
+<li>UNSIGNED 修饰符规定字段只保存正值。因为不需要保存数字的正、负符号，可以在储时节约一个“位”的空间。从而增大这个字段可以存储的值的范围。</li>
+<li>ZEROFILL 修饰符规定 0（不是空格）可以用来真补输出的值。使用这个修饰符可以阻止 MySQL 数据库存储负值。</li>
+<li>FLOAT、DOUBLE 和 DECIMAL 类型MySQL 支持的三个浮点类型是 FLOAT、DOUBLE 和 DECIMAL 类型。FLOAT 数值类型用于表示单精度浮点数值，而 DOUBLE 数值类型用于表示双精度浮点数值。与整数一样，这些类型也带有附加参数：一个显示宽度指示器和一个小数点指示器。比如语句 FLOAT(7,3) 规定显示的值不会超过 7 位数字，小数点后面带有 3 位数字。对于小数点后面的位数超过允许范围的值，MySQL 会自动将它四舍五入为最接近它的值，再插入它。DECIMAL 数据类型用于精度要求非常高的计算中，这种类型允许指定数值的精度和计数方法作为选择参数。精度在这里指为这个值保存的有效数字的总个数，而计数方法表示小数点后数字的位数。比如语句 DECIMAL(7,3) 规定了存储的值不会超过 7 位数字，并且小数点后不超过 3 位。忽略 DECIMAL 数据类型的精度和计数方法修饰符将会使 MySQL 数据库把所有标识为这个数据类型的字段精度设置为 10，计算方法设置为 0。UNSIGNED 和 ZEROFILL 修饰符也可以被 FLOAT、DOUBLE 和 DECIMAL 数据类型使用。并且效果与 INT 数据类型相同。</li>
+</ul>
+<h3 id="Mysql数据库基础操作"><a href="#Mysql数据库基础操作" class="headerlink" title="Mysql数据库基础操作:"></a>Mysql数据库基础操作:</h3><ul>
+<li><p><code>SHOW DATABASES;</code> 显示所有数据库</p>
+</li>
+<li><p><code>CREATE DATABASE name;</code>创建name数据库</p>
+</li>
+<li><p><code>CROP DATABASE name;</code> 删除数据库</p>
+</li>
+<li><p><code>SHOW WARNINGS;</code>  显示警告信息</p>
+</li>
+<li><p><code>SELECT DATABASE();</code> 显示当前所在的数据库</p>
+</li>
+<li><p><code>CREATE TABLE name;</code> 创建name表</p>
+</li>
+</ul>
+<h3 id="数据表的创建和键的修改："><a href="#数据表的创建和键的修改：" class="headerlink" title="数据表的创建和键的修改："></a>数据表的创建和键的修改：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE tb1(</div><div class="line">  username VARCHAR(20),</div><div class="line">  age TINYINT UNSIGNED,</div><div class="line">  money FLOAT (8,2)UNSIGNED</div><div class="line">);</div></pre></td></tr></table></figure>
+<p>创建有三个键的表:</p>
+<ul>
+<li>字符20个的username</li>
+<li>无符号TINYINT型的 age</li>
+<li>无符号型的FLOAT 8位小数点前，2位小数点后</li>
+</ul>
+<p><code>SHOW TABLES FROM mysql;</code><br>显示某数据库下的数据表列表</p>
+<p><code>SHOW COLUMNS FROM  tb1;</code></p>
+<p>显示某张表所有的键？</p>
+<p><code>INSERT tb1  VALUES (&#39;tom&#39;,30,1000.1);</code></p>
+<p>默认插入所有数据</p>
+<p><code>INSERT tb1 (username,money ) VALUES (&#39;jack&#39;,1000.1);</code></p>
+<p>插入指定列的值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">CREATE TABLE tb2 (</div><div class="line">  name VARCHAR(20)      NOT NULL,</div><div class="line">  age  TINYINT UNSIGNED NOT NULL</div><div class="line">);</div></pre></td></tr></table></figure>
+<p>创建键不为空值的表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">CREATE TABLE tb3(</div><div class="line">  sid  INT  PRIMARY KEY AUTO_INCREMENT,</div><div class="line">  sname VARCHAR(20) NOT NULL ,</div><div class="line">  sinfo VARCHAR(255)</div><div class="line">);</div></pre></td></tr></table></figure>
+<p>创建主键为sid的数据表，且sid为自增</p>
+<blockquote>
+<p>在主键没有设置自增属性的情况下，不允许出现同主键的一行数据</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">CREATE TABLE tb4(</div><div class="line">  sid  INT  PRIMARY KEY ,</div><div class="line">  sname VARCHAR(20) NOT NULL UNIQUE KEY,</div><div class="line">  sinfo VARCHAR(255)</div><div class="line">);</div></pre></td></tr></table></figure>
+<p>创建主键为sid的ta4 sname为不为空的且UNIQUE KEY，此表中sid不可重复，情况下sname也不可相同。</p>
+<blockquote>
+<p>UNIQUE KEY 作用的key和主键一同约束，保证数据唯一性</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">CREATE TABLE tb5(</div><div class="line">  sid  INT  PRIMARY KEY AUTO_INCREMENT ,</div><div class="line">  sname VARCHAR(20) NOT NULL UNIQUE KEY,</div><div class="line">  sinfo VARCHAR(255) DEFAULT &apos;no summary&apos;</div><div class="line">);</div></pre></td></tr></table></figure>
+<p>创建tb5在sinfo没有赋值的情况下，默认会置为<code>no summary</code>字符串</p>
+<blockquote>
+<p>DEFAULT 对字段进行默认初始赋值</p>
+</blockquote>
+<p>约束分为列级约束（约束一个字段）表级约束（约束多个字段）约束包括：</p>
+<ul>
+<li>NOT NULL（非空约束）</li>
+<li>PRIMARY KEY（主键约束）</li>
+<li>UNIQUE KEY （唯一约束）</li>
+<li>DEFAULT （默认约束）</li>
+<li>FOREIGN KEY（外键约束）</li>
+</ul>
+<p>关于外键的约束要求：</p>
+<ol>
+<li>父表和子表必须使用相同的存储引擎，且禁止使用临时表</li>
+<li>数据表的存储引擎只能是InnoDB</li>
+<li>外键列和参照列必须有相似的数据类型，其中数字的长度或是否有符号位必须相同，而字符的长度可以不同</li>
+<li>外键列和参照列必须创建索引。如果外键列不存在索引的话，mysql将自动创建索引。</li>
+</ol>
+<p>外键约束的参照操作：</p>
+<ol>
+<li>CASCADE 从父列表删除或更新且自动删除或更新子表中匹配的行</li>
+<li>SET NULL 从父表删除或更新行，并设置子表中的外键列为NUL。如果使用该选项，必须保证子表列没有指定的NOT NULL</li>
+<li>RESTRICT ：拒绝对父表的删除或更新操作。</li>
+<li>NO ACTION 标准的SQL的关键字，在Mysql中与RETRICT相同</li>
+</ol>
+<p>修改数据表：<br><code>ALTER TABLE person ADD  info VARCHAR(20) DEFAULT &#39;no summary&#39;</code><br>添加一列<br><code>ALTER TABLE person DROP info</code><br> 删除某一列</p>
+<p><code>ALTER TABLE person DROP PRIMARY KEY</code></p>
+<p>删除person表的主键的约束</p>
+<p><code>ALTER TABLE person ADD FOREIGN KEY (info) REFERENCES test2 (id)</code></p>
+<p>person表中info添加test2中id外键</p>
+<p><code>ALTER TABLE person ALTER pname SET DEFAULT &#39;fuck&#39;</code></p>
+<p>修改person表中pname字段的默认值</p>
+<p><code>ALTER TABLE person ADD  UNIQUE (pname);</code></p>
+<p>给person表中 pname添加UNIQUE属性</p>
+<p><code>ALTER TABLE person DROP FOREIGN KEY person_ibfk_1</code></p>
+<p>删除person的名为person_ibfk_1的外键<br>在外键建立的时候，系统会为主键指定一个名字（通过SHOW CREATE TABLE person 语句查看建表外键名字），删除时使用即可删除外键约束</p>
+<p><code>ALTER TABLE person MODIFY pid SMALLINT</code></p>
+<p>修改person表中的pid的数据类型 ，（后面的语句都可修改）</p>
+<p><code>ALTER TABLE person MODIFY pid SMALLINT AFTER pname</code></p>
+<p>修改person的pid属性在表中的位置（在pname属性后）</p>
+<p><code>ALTER TABLE person CHANGE pid p_id INT FIRST</code></p>
+<p>修改person表中pid 的名称（p_id）和属性 (INT) 以及在表中的位置（FIRST）</p>
+<p><code>ALTER TABLE person RENAME per</code></p>
+<p>修改perosn在表的名字为（per）</p>
+<p><code>RENAME TABLE per TO person</code></p>
+<p>改名字的另一种方式将(per)(改为peroson)</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1872052-69b4ce8ea77df414.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="97092E47-D5C4-4895-A04B-55B95FBB4D1E.png"></p>
+
+ 
+                <!-- Meta -->
+                <div class="post-meta">
+                    <hr>
+                    <br>
+                    <div class="post-tags">
+                        
+                    </div>
+                    <div class="post-date">
+                        2017 年 09 月 09 日
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comments -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- Disqus Comments -->
+
+
+            </div>
+        </div>
+    </div>
+</article>
+</section>
+
+    <!-- Scripts -->
+    <!-- jQuery -->
+<script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+	console.log('Hexo-theme-hollow designed by zchen9 🙋 © 2015-' + (new Date()).getFullYear());
+</script>
+
+    <!-- Google Analytics -->
+    
+
+</body>
+
+</html>
