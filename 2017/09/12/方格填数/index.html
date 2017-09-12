@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="原博
+#方格填数
+
+如下的10个格子填入0~9的数字。要求：连续的两个数字不能相邻。（左右、上下、对角都算相邻）一共有多少种可能的填数方案？请填写表示方案数目的整数。注意：你提交的应该是一个整数，不要填写任何多余的内容或说明性文字。
+
+12345678910111213141516171819202">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Dragon">
+    
+
+    <!-- Title -->
+    
+    <title>方格填数 | Dragon的博客</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Serif:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <!-- Content -->
+    <section class="article-container">
+<!-- Back Home -->
+<a class="nav-back" href="/">
+    <i class="fa fa-puzzle-piece"></i>
+</a>
+
+<!-- Page Header -->
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>方格填数</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Main Content -->
+            <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p><a href="http://blog.csdn.net/y1196645376/article/details/50938608" target="_blank" rel="external">原博</a></p>
+<p>#方格填数</p>
+<blockquote>
+<p>如下的10个格子<br><img src="http://upload-images.jianshu.io/upload_images/2027280-bfa9a0fc598bad72.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>填入0~9的数字。要求：连续的两个数字不能相邻。<br>（左右、上下、对角都算相邻）<br>一共有多少种可能的填数方案？<br>请填写表示方案数目的整数。<br>注意：你提交的应该是一个整数，不要填写任何多余的内容或说明性文字。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div></pre></td><td class="code"><pre><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;math.h&gt;</div><div class="line">#define bool int</div><div class="line">#define false 0</div><div class="line">#define true 1</div><div class="line">int flag[3][4]; //表示哪些可以填数</div><div class="line">int mpt[3][4];  //填数</div><div class="line">bool visit[10]; //记下被使用过的数字</div><div class="line">int ans = 0;</div><div class="line">void init()  &#123; //初始化</div><div class="line">    int i,j;</div><div class="line">    for(i = 0 ; i &lt; 3 ; i ++)</div><div class="line">        for(j = 0 ; j &lt; 4 ; j ++)</div><div class="line">            flag[i][j] = 1;</div><div class="line">    flag[0][0] = 0;</div><div class="line">    flag[2][3] = 0;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void Solve()&#123;</div><div class="line">    int dir[8][2] =</div><div class="line">    &#123;   0,  1,//左</div><div class="line">        0, -1,//右</div><div class="line">        1,  0,//下</div><div class="line">       -1,  0,//上</div><div class="line">        1,  1,//左下</div><div class="line">        1, -1,//右下</div><div class="line">       -1,  1,//右上</div><div class="line">       -1, -1 //左上</div><div class="line">    &#125;;   //8个方向</div><div class="line">    int book = true;</div><div class="line">    for(int i = 0 ; i &lt; 3 ; i ++)&#123;//遍历元素</div><div class="line">        for(int j = 0 ; j &lt; 4; j ++)&#123;</div><div class="line">            //判断每个数周围是否满足</div><div class="line">            if(flag[i][j] == 0) continue;//跳过不能填的地方</div><div class="line">            for( int k = 0 ; k &lt; 8 ; k ++)&#123;//每个方向挨个判断  依次 左-&gt;右-&gt;下-&gt;上-&gt;左下-&gt;右下-&gt;右上-&gt;左下。</div><div class="line">                int x,y;</div><div class="line">                x = i + dir[k][0];//k在变 依次取出二维数组dir的每一行的两个值 相加得 该方向的上的坐标 x y。</div><div class="line">                y = j + dir[k][1];</div><div class="line">                if(x &lt; 0 || x &gt;= 3 || y &lt; 0 || y &gt;= 4 || flag[x][y] == 0) continue;//若数组越界 或 当前值周围是特殊的地方头尾两空 则 跳过</div><div class="line">                if(abs(mpt[x][y]/*某方向的数字 */ - mpt[i][j]/* 该数字*/) == 1)  book = false;//做差 若数值相邻的话就  book 置为0</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    if(book) ans ++;//计数</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">void dfs(int index)&#123;</div><div class="line">    int x,y;//下角标</div><div class="line">    x = index / 4;</div><div class="line">    y = index % 4;</div><div class="line">    if( x == 3)&#123;//出口 x == 3 表明 三行走完 赋值完毕</div><div class="line">        Solve();//判断</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line">    if(flag[x][y])&#123;//是否为可行的地方</div><div class="line">        for(int i = 0 ; i &lt; 10 ; i ++)&#123;</div><div class="line">            if(!visit[i])&#123;</div><div class="line"></div><div class="line">                visit[i] = true;//标记</div><div class="line">                mpt[x][y] = i;//赋值</div><div class="line">                dfs(index+1);//递归下一位</div><div class="line">                visit[i] = false;//取消标记</div><div class="line"></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    else</div><div class="line">    &#123;</div><div class="line">        dfs(index+1);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">int main()&#123;</div><div class="line">    init();</div><div class="line">    dfs(0);</div><div class="line">    printf(&quot;%d\n&quot;,ans);</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+ 
+                <!-- Meta -->
+                <div class="post-meta">
+                    <hr>
+                    <br>
+                    <div class="post-tags">
+                        
+                    </div>
+                    <div class="post-date">
+                        2017 年 09 月 12 日
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comments -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- Disqus Comments -->
+
+
+            </div>
+        </div>
+    </div>
+</article>
+</section>
+
+    <!-- Scripts -->
+    <!-- jQuery -->
+<script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+	console.log('Hexo-theme-hollow designed by zchen9 🙋 © 2015-' + (new Date()).getFullYear());
+</script>
+
+    <!-- Google Analytics -->
+    
+
+</body>
+
+</html>

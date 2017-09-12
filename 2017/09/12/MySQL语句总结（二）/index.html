@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="##数据的增删改查
+###插入数据
+查看person的建表语句：
+123456person | CREATE TABLE `person` (  `pid` int(11) NOT NULL AUTO_INCREMENT,  `name` varchar(10) NOT NULL,  PRIMARY">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Dragon">
+    
+
+    <!-- Title -->
+    
+    <title>MySQL语句总结（二） | Dragon的博客</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Serif:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <!-- Content -->
+    <section class="article-container">
+<!-- Back Home -->
+<a class="nav-back" href="/">
+    <i class="fa fa-puzzle-piece"></i>
+</a>
+
+<!-- Page Header -->
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>MySQL语句总结（二）</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Main Content -->
+            <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>##数据的增删改查</p>
+<p>###插入数据</p>
+<p>查看person的建表语句：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">person | CREATE TABLE `person` (</div><div class="line">  `pid` int(11) NOT NULL AUTO_INCREMENT,</div><div class="line">  `name` varchar(10) NOT NULL,</div><div class="line">  PRIMARY KEY (`pid`)</div><div class="line">) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1</div></pre></td></tr></table></figure>
+<p><code>INSERT person VALUES(NULL,&#39;top&#39;);</code><br>向person表中插入数据（主键pid是自增类型的所以再插入数据时：在不指定键的默认情况下应该传NULL（在传入数字时，可传入表达式）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">+-----+------+</div><div class="line">| pid | name |</div><div class="line">+-----+------+</div><div class="line">|   1 | top  |</div><div class="line">+-----+------+</div></pre></td></tr></table></figure>
+<h3 id="更新语句"><a href="#更新语句" class="headerlink" title="更新语句"></a>更新语句</h3><p><code>UPDATE person set name = &#39;wang&#39;</code><br>将person表中所有的name字段改为 <code>wang</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">+-----+------+</div><div class="line">| pid | name |</div><div class="line">+-----+------+</div><div class="line">|   1 | wang |</div><div class="line">|   2 | wang |</div><div class="line">|   3 | wang |</div><div class="line">|   4 | wang |</div><div class="line">|   5 | wang |</div><div class="line">+-----+------+</div></pre></td></tr></table></figure>
+<p><code>UPDATE person set name = &#39;jack&#39; WHERE pid % 2 =0;</code><br>将person表中所有pid为偶数的记录的name改为jack</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">+-----+------+</div><div class="line">| pid | name |</div><div class="line">+-----+------+</div><div class="line">|   1 | wang |</div><div class="line">|   2 | jack |</div><div class="line">|   3 | wang |</div><div class="line">|   4 | jack |</div><div class="line">|   5 | wang |</div><div class="line">+-----+------+</div></pre></td></tr></table></figure>
+<h3 id="删除语句"><a href="#删除语句" class="headerlink" title="删除语句"></a>删除语句</h3><p><code>DELETE FROM person WHERE pid = 5;</code><br>删除person表中 pid 为5的记录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">+-----+------+</div><div class="line">| pid | name |</div><div class="line">+-----+------+</div><div class="line">|   1 | wang |</div><div class="line">|   2 | jack |</div><div class="line">|   3 | wang |</div><div class="line">|   4 | jack |</div><div class="line">+-----+------+</div></pre></td></tr></table></figure>
+<h3 id="SELECT语句"><a href="#SELECT语句" class="headerlink" title="SELECT语句"></a>SELECT语句</h3><p><code>SELECT NOW();</code><br>查询当前时间</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">+---------------------+</div><div class="line">| NOW()               |</div><div class="line">+---------------------+</div><div class="line">| 2017-09-07 21:59:41 |</div><div class="line">+---------------------+</div></pre></td></tr></table></figure>
+<p><code>SELECT pid FROM person;</code><br>只查询<code>pid</code>这一列的数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">+-----+</div><div class="line">| pid |</div><div class="line">+-----+</div><div class="line">|   1 |</div><div class="line">|   2 |</div><div class="line">|   3 |</div><div class="line">|   4 |</div><div class="line">+-----+</div></pre></td></tr></table></figure>
+<p><code>SELECT name , pid FROM person;</code><br>查询两列。查询时的字段与数据表的实际字段没关系，与查询的结果有关（先查name，后查pid ），查询时<code>*</code>表示数据表的所有列</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">+------+-----+</div><div class="line">| name | pid |</div><div class="line">+------+-----+</div><div class="line">| wang |   1 |</div><div class="line">| jack |   2 |</div><div class="line">| wang |   3 |</div><div class="line">| jack |   4 |</div><div class="line">+------+-----+</div></pre></td></tr></table></figure>
+<p><code>SELECT name AS  pname , pid AS id  FROM person;</code><br><code>AS</code>关键字：关键字将查询的列名映射为AS指定的字段，影响带查询结果（查询时是name，和 pid 查询结果是 pname和id）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">+-------+----+</div><div class="line">| pname | id |</div><div class="line">+-------+----+</div><div class="line">| wang  |  1 |</div><div class="line">| jack  |  2 |</div><div class="line">| wang  |  3 |</div><div class="line">| jack  |  4 |</div><div class="line">+-------+----+</div></pre></td></tr></table></figure>
+<h3 id="GROUP-BY语句"><a href="#GROUP-BY语句" class="headerlink" title="GROUP BY语句"></a>GROUP BY语句</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">+-----+-------+---------+</div><div class="line">| pid | name  | classid |</div><div class="line">+-----+-------+---------+</div><div class="line">|   5 | tom   |       2 |</div><div class="line">|   6 | jack  |       2 |</div><div class="line">|   7 | lilei |       3 |</div><div class="line">|   8 | han   |       1 |</div><div class="line">|   9 | jon   |       2 |</div><div class="line">|  10 | snow  |       3 |</div><div class="line">+-----+-------+---------+</div></pre></td></tr></table></figure>
+<p><code>SELECT classid FROM person GROUP BY classid;</code><br>数据表按照classid分类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">+---------+</div><div class="line">| classid |</div><div class="line">+---------+</div><div class="line">|       1 |</div><div class="line">|       2 |</div><div class="line">|       3 |</div><div class="line">+---------+</div></pre></td></tr></table></figure>
+<h3 id="LIMIT语句"><a href="#LIMIT语句" class="headerlink" title="LIMIT语句"></a>LIMIT语句</h3><p><code>SELECT *FROM person LIMIT 2,3;</code><br>从person表中取出从索引为2开始的3条记录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">+-----+-------+---------+</div><div class="line">| pid | name  | classid |</div><div class="line">+-----+-------+---------+</div><div class="line">|   7 | lilei |       3 |</div><div class="line">|   8 | han   |       1 |</div><div class="line">|   9 | jon   |       2 |</div><div class="line">+-----+-------+---------+</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE classtwo(</div><div class="line">tid INT PRIMARY KEY AUTO_INCREMENT,</div><div class="line">tname VARCHAR(20)</div><div class="line"> );</div></pre></td></tr></table></figure>
+<p>创建新的数据表classtwo</p>
+<p><code>INSERT classtwo(tname)  SELECT  name  FROM person  WHERE classid = 2;</code><br>检索出person表中classid为2的记录并将name插入classtwo的字段中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">+-----+-------+</div><div class="line">| tid | tname |</div><div class="line">+-----+-------+</div><div class="line">|   1 | tom   |</div><div class="line">|   2 | jack  |</div><div class="line">|   3 | jon   |</div><div class="line">+-----+-------+</div></pre></td></tr></table></figure>
+
+ 
+                <!-- Meta -->
+                <div class="post-meta">
+                    <hr>
+                    <br>
+                    <div class="post-tags">
+                        
+                    </div>
+                    <div class="post-date">
+                        2017 年 09 月 12 日
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comments -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- Disqus Comments -->
+
+
+            </div>
+        </div>
+    </div>
+</article>
+</section>
+
+    <!-- Scripts -->
+    <!-- jQuery -->
+<script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+	console.log('Hexo-theme-hollow designed by zchen9 🙋 © 2015-' + (new Date()).getFullYear());
+</script>
+
+    <!-- Google Analytics -->
+    
+
+</body>
+
+</html>

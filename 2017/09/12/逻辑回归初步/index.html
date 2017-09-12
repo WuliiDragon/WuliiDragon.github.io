@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="最近在看一些机器学习入门文章 遇到一些概念 理解多少了应该把它记下来原文
+##逻辑回归
+
+参考文章
+
+Logistic regression（逻辑回归）是当前业界比较常用的机器学习方法，用于估计某种事物的可能性。
+
+比如某用户购买某商品的可能性，某病人患有某种疾病的可能性，以及某广告被用户点击的可能">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Dragon">
+    
+
+    <!-- Title -->
+    
+    <title>逻辑回归初步 | Dragon的博客</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Serif:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <!-- Content -->
+    <section class="article-container">
+<!-- Back Home -->
+<a class="nav-back" href="/">
+    <i class="fa fa-puzzle-piece"></i>
+</a>
+
+<!-- Page Header -->
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>逻辑回归初步</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Main Content -->
+            <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>最近在看一些机器学习入门文章 遇到一些概念 理解多少了应该把它记下来<br><a href="http://blog.csdn.net/han_xiaoyang/article/details/49123419" target="_blank" rel="external">原文</a></p>
+<p>##逻辑回归</p>
+<hr>
+<p><a href="http://www.codesec.net/view/243432.html" target="_blank" rel="external">参考文章</a></p>
+<blockquote>
+<p>Logistic regression（逻辑回归）是当前业界比较常用的机器学习方法，用于估计某种事物的可能性。</p>
+</blockquote>
+<p>比如某用户购买某商品的可能性，某病人患有某种疾病的可能性，以及某广告被用户点击的可能性等。（注意这里是：“可能性”，而非数学上的“概率”，logisitc回归的结果并非数学定义中的概率值，不可以直接当做概率值来用。该结果往往用于和其他特征值加权求和，而非直接相乘）</p>
+<hr>
+<p>###回归</p>
+<p>其实就是对已知公式的未知参数进行估计。大家可以简单的理解为，在给定训练样本点和已知的公式后，对于一个或多个未知参数，机器会自动枚举参数的所有可能取值（对于多个参数要枚举它们的不同组合），直到找到那个最符合样本点分布的参数（或参数组合）。</p>
+<p>###线性回归</p>
+<p>例子：假设要找一个y和x之间的规律，其中x是鞋子价钱，y是鞋子的销售量。（为什么要找这个规律呢？这样的话可以帮助定价来赚更多的钱嘛，小学的应用题经常做的呵呵）。已知一些往年的销售数据（x0,y0), (x1, y1), … (xn, yn)做样本集,并假设它们满足线性关系：y = a<em>x + b （其中a,b的具体取值还不确定），线性回归即根据往年数据找出最佳的a, b取值，使 y = a</em>x + b 在所有样本集上误差最小。这种简单的回归画图或计算就可以解决</p>
+<p>上面这种情况考虑影响鞋子的销售量因素只有一个，那就是价格 但是实际中影响销量的因素不止只一个因素可能会有鞋子的质量，广告的投入，店铺所在街区的人流量都会影响销量等因素 我们想得到这样的公式：sell = a<em>x + b</em>y + c<em>z + d</em>zz + e。这个时候画图就画不出来了，规律也十分难找，那么交给线性回归去做就好。</p>
+<p>需要注意的是，这里线性回归能过获得好效果的前提是y = a*x + b 至少从总体上是有道理的（因为我们认为鞋子越贵，卖的数量越少，越便宜卖的越多。另外鞋子质量、广告投入、客流量等都有类似规律）；但并不是所有类型的变量都适合用线性回归，比如说x不是鞋子的价格，而是鞋子的尺码），那么无论回归出什么样的（a,b），错误率都会极高（因为事实上尺码太大或尺码太小都会减少销量）。总之：如果我们的公式假设是错的，任何回归都得不到好结果。</p>
+<hr>
+<p>###Logistic方程</p>
+<p>上面例子中所得到的结果是具体的实际数值 但是有时候我们会遇到 下面类似的问题</p>
+<ul>
+<li>某用户购买某商品的可能性</li>
+<li>某病人患有某种疾病的可能性</li>
+<li>某广告被用户点击的可能性等</li>
+</ul>
+<p>这些问题的共同点都是产生一个0~1之间的类似概率的数值<br>但 运用线性回归显然不满足这个区间要求。于是引入了Logistic方程，</p>
+<p>这里再次说明，该数值并不是数学中定义的概率值。那么既然得到的并不是概率值，为什么我们还要费这个劲把数值归一化为0~1之间呢？归一化的好处在于数值具备可比性和收敛的边界，这样当你在其上继续运算时（比如你不仅仅是关心鞋子的销量，而是要对鞋子卖出的可能、当地治安情况、当地运输成本 等多个要素之间加权求和，用综合的加和结果决策是否在此地开鞋店时），归一化能够保证此次得到的结果不会因为边界 太大/太小 导致 覆盖其他feature 或 被其他feature覆盖。（举个极端的例子，如果鞋子销量最低为100，但最好时能卖无限多个，而当地治安状况是用0~1之间的数值表述的，如果两者直接求和治安状况就完全被忽略了）<br>这是用logistic回归而非直接线性回归的主要原因。到了这里，也许你已经开始意识到，没错，Logistic Regression 就是一个被logistic方程归一化后的线性回归，仅此而已。<br>至于所以用logistic而不用其它，是因为这种归一化的方法往往比较合理（人家都说自己叫logistic了嘛 呵呵），能够打压过大和过小的结果（往往是噪音），以保证主流的结果不至于被忽视。具体的公式及图形见本文的一、官方定义部分。其中f(X)就是我们上面例子中的sell的实数值了，而y就是得到的0~1之间的卖出可能性数值了。</p>
+<hr>
+<p>###sigmoid函数<br> 函数p(x)<br><img src="https://wenjun.blog.ustc.edu.cn/wp-content/uploads/2016/01/QQ%E6%88%AA%E5%9B%BE20160115170338.png" alt="表达式"><br><img src="https://wenjun.blog.ustc.edu.cn/wp-content/uploads/2016/01/QQ%E6%88%AA%E5%9B%BE20160115164821.png" alt="图像"></p>
+<p>不难看出</p>
+<ul>
+<li>x=0时，p(x=0.5</li>
+<li>x&gt;0时，p(x)&gt;0.5</li>
+<li>x&lt;0时，p(x)&lt;0.5<br>所以我们定义线性回归的预测函数为Y=W^T X，那么逻辑回归的输出Y= g(W^TX)，其中y=g(z)函数正是上述sigmoid函数</li>
+</ul>
+<hr>
+<p>###判定边界(Decision Boundary)</p>
+<p><a href="http://m.blog.csdn.net/article/details?id=51240522" target="_blank" rel="external">参考文章</a><br><img src="http://upload-images.jianshu.io/upload_images/1872052-239cd9880c8ad193.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="简单的模型"><br>其中θ(0,1,2) 分别取(-3, 1, 1)。带入<br>则当−3+X1+X2≥0时, y = 1; 则X1+X2=3是一个决策边界，<br>图形表示如下，刚好把图上的两类点区分开来：<br><img src="http://upload-images.jianshu.io/upload_images/1872052-1f25d1615587bb14?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="线性模型"></p>
+<p>对于复杂的非线性模型<br><img src="http://upload-images.jianshu.io/upload_images/1872052-3c622a6998e50dad?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="复杂"><br>假设参数为 θ[-1  0  0  1  1]<br>这时当<img src="http://upload-images.jianshu.io/upload_images/1872052-85f791b01be0257c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">我们判定y=1，这时的决策边界是一个圆形，如下图所示：<br><img src="http://upload-images.jianshu.io/upload_images/1872052-de3b461a5d311c65?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>因此只要模型的参数越复杂 多复杂的判定边界都可以适应</p>
+<hr>
+<p>###代价函数(Cost Function)<br><a href="https://wenku.baidu.com/view/a3865b43284ac850ac024226.html?from=search" target="_blank" rel="external">参考</a></p>
+<p>对于线性回归模型，我们定义的代价函数是所有模型误差的平方和 线性回归的代价函数定义为:<br><img src="http://upload-images.jianshu.io/upload_images/1872052-e31b97acbd161702?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="代价函数"><br><img src="http://upload-images.jianshu.io/upload_images/1872052-087a0794f634a556.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><img src="http://upload-images.jianshu.io/upload_images/1872052-66232303921db9c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><img src="http://upload-images.jianshu.io/upload_images/1872052-99005a9d570bffa5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><img src="http://upload-images.jianshu.io/upload_images/1872052-42880467b183ffcb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><img src="http://upload-images.jianshu.io/upload_images/1872052-588ea0fd7328d71a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><img src="http://upload-images.jianshu.io/upload_images/1872052-9a1bbd432e1ef841.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>当然我们可以和线性回归类比得到一个逻辑回归代价函数，实际就是上述公式中hθ(x)取为逻辑回归中的g(θTx)，但是这会引发代价函数为“非凸”函数的问题，简单一点说就是这个函数有很多个局部最低点，如下图所示：<br><img src="http://upload-images.jianshu.io/upload_images/1872052-cba92c88699e9f9c?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="非凸的"><br>而我们希望我们的代价函数是一个如下图所示，碗状结构的凸函数，这样我们算法求解到局部最低点，就一定是全局最小值点。<br><img src="http://upload-images.jianshu.io/upload_images/1872052-b4b0b334cb899f9f?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="凸函数"><br>上述的Cost Function对于逻辑回归是不可行的，我们需要其他形式的Cost Function来保证逻辑回归的成本函数是凸函数 于是 跳过大量的数学推导，直接出结论了，适合逻辑回归的代价函数:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1872052-6a63472f00db9306?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>通过这样构建的Cost(hø(x), y)函数的特点是：<br>当实际的 y=1 且 hø=1 时，误差为0；当  y=1 但 hø != 1时，误差随hø的变小而变大；<br>当实际的 y=0 且 hø=0 时，误差代价为0；当 y=0 但 hø != 0 时，误差随hø的变大而变大。<br><img src="http://upload-images.jianshu.io/upload_images/1872052-5235a54b7eedfa99?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>将构建的Cost(hø(x), y) 进行一个简化，可以得到如下简化公式：<br><img src="http://upload-images.jianshu.io/upload_images/1872052-40539eb7cffb08a1?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>这便是逻辑回归模型的代价函数了。</p>
+<hr>
+<p>###梯度下降算法(Gradient Descent)</p>
+
+ 
+                <!-- Meta -->
+                <div class="post-meta">
+                    <hr>
+                    <br>
+                    <div class="post-tags">
+                        
+                    </div>
+                    <div class="post-date">
+                        2017 年 09 月 12 日
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comments -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- Disqus Comments -->
+
+
+            </div>
+        </div>
+    </div>
+</article>
+</section>
+
+    <!-- Scripts -->
+    <!-- jQuery -->
+<script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+	console.log('Hexo-theme-hollow designed by zchen9 🙋 © 2015-' + (new Date()).getFullYear());
+</script>
+
+    <!-- Google Analytics -->
+    
+
+</body>
+
+</html>
