@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859USE test;CREATE TABLE IF NOT EXISTS tdb_g">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Dragon">
+    
+
+    <!-- Title -->
+    
+    <title>MySQL练习（一） | Dragon的博客</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Serif:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <!-- Content -->
+    <section class="article-container">
+<!-- Back Home -->
+<a class="nav-back" href="/">
+    <i class="fa fa-puzzle-piece"></i>
+</a>
+
+<!-- Page Header -->
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>MySQL练习（一）</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Main Content -->
+            <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line">USE test;</div><div class="line"></div><div class="line">CREATE TABLE IF NOT EXISTS tdb_goods(</div><div class="line">  goods_id    SMALLINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,</div><div class="line">  goods_name  VARCHAR(150) NOT NULL,</div><div class="line">  goods_cate  VARCHAR(40)  NOT NULL,</div><div class="line">  brand_name  VARCHAR(40)  NOT NULL,</div><div class="line">  goods_price DECIMAL(15,3) UNSIGNED NOT NULL DEFAULT 0,</div><div class="line">  is_show     BOOLEAN NOT NULL DEFAULT 1,</div><div class="line">  is_saleoff  BOOLEAN NOT NULL DEFAULT 0</div><div class="line">)ENGINE=InnoDB DEFAULT CHARSET=utf8;</div><div class="line"></div><div class="line">-- 写入记录</div><div class="line"></div><div class="line">INSERT tdb_goods (goods_name,goods_cate,brand_name,goods_price,is_show,is_saleoff) VALUES(&apos;R510VC 15.6英寸笔记本&apos;,&apos;笔记本&apos;,&apos;华硕&apos;,&apos;3399&apos;,DEFAULT,DEFAULT);</div><div class="line"></div><div class="line">INSERT tdb_goods (goods_name,goods_cate,brand_name,goods_price,is_show,is_saleoff) VALUES(&apos;Y400N 14.0英寸笔记本电脑&apos;,&apos;笔记本&apos;,&apos;联想&apos;,&apos;4899&apos;,DEFAULT,DEFAULT);</div><div class="line"></div><div class="line">INSERT tdb_goods (goods_name,goods_cate,brand_name,goods_price,is_show,is_saleoff) VALUES(&apos;G150TH 15.6英寸游戏本&apos;,&apos;游戏本&apos;,&apos;雷神&apos;,&apos;8499&apos;,DEFAULT,DEFAULT);</div><div class="line"></div><div class="line">INSERT tdb_goods (goods_name,goods_cate,brand_name,goods_price,is_show,is_saleoff) VALUES(&apos;X550CC 15.6英寸笔记本&apos;,&apos;笔记本&apos;,&apos;华硕&apos;,&apos;2799&apos;,DEFAULT,DEFAULT);</div><div class="line"></div><div class="line">INSERT tdb_goods (goods_name,goods_cate,brand_name,goods_price,is_show,is_saleoff) VALUES(&apos;X240(20ALA0EYCD) 12.5英寸超极本&apos;,&apos;超级本&apos;,&apos;联想&apos;,&apos;4999&apos;,DEFAULT,DEFAULT);</div><div class="line"></div><div class="line">INSERT tdb_goods (goods_name,goods_cate,brand_name,goods_price,is_show,is_saleoff) VALUES(&apos;U330P 13.3英寸超极本&apos;,&apos;超级本&apos;,&apos;联想&apos;,&apos;4299&apos;,DEFAULT,DEFAULT);</div><div class="line"></div><div class="line">INSERT tdb_goods (goods_name,goods_cate,brand_name,goods_price,is_show,is_saleoff) VALUES(&apos;SVP13226SCB 13.3英寸触控超极本&apos;,&apos;超级本&apos;,&apos;索尼&apos;,&apos;7999&apos;,DEFAULT,DEFAULT);</div><div class="line"></div><div class="line">INSERT tdb_goods (goods_name,goods_cate,brand_name,goods_price,is_show,is_saleoff) VALUES(&apos;iPad mini MD531CH/A 7.9英寸平板电脑&apos;,&apos;平板电脑&apos;,&apos;苹果&apos;,&apos;1998&apos;,DEFAULT,DEFAULT);</div><div class="line"></div><div class="line">INSERT tdb_goods (goods_name,goods_cate,brand_name,goods_price,is_show,is_saleoff) VALUES(&apos;iPad Air MD788CH/A 9.7英寸平板电脑 （16G WiFi版）&apos;,&apos;平板电脑&apos;,&apos;苹果&apos;,&apos;3388&apos;,DEFAULT,DEFAULT);</div><div class="line"></div><div class="line">INSERT tdb_goods (goods_name,goods_cate,brand_name,goods_price,is_show,is_saleoff) VALUES(&apos; iPad mini ME279CH/A 配备 Retina 显示屏 7.9英寸平板电脑 （16G WiFi版）&apos;,&apos;平板电脑&apos;,&apos;苹果&apos;,&apos;2788&apos;,DEFAULT,DEFAULT);</div><div class="line"></div><div class="line">INSERT tdb_goods (goods_name,goods_cate,brand_name,goods_price,is_show,is_saleoff) VALUES(&apos;IdeaCentre C340 20英寸一体电脑 &apos;,&apos;台式机&apos;,&apos;联想&apos;,&apos;3499&apos;,DEFAULT,DEFAULT);</div><div class="line"></div><div class="line">INSERT tdb_goods (goods_name,goods_cate,brand_name,goods_price,is_show,is_saleoff) VALUES(&apos;Vostro 3800-R1206 台式电脑&apos;,&apos;台式机&apos;,&apos;戴尔&apos;,&apos;2899&apos;,DEFAULT,DEFAULT);</div><div class="line"></div><div class="line">INSERT tdb_goods (goods_name,goods_cate,brand_name,goods_price,is_show,is_saleoff) VALUES(&apos;iMac ME086CH/A 21.5英寸一体电脑&apos;,&apos;台式机&apos;,&apos;苹果&apos;,&apos;9188&apos;,DEFAULT,DEFAULT);</div><div class="line"></div><div class="line">INSERT tdb_goods (goods_name,goods_cate,brand_name,goods_price,is_show,is_saleoff) VALUES(&apos;AT7-7414LP 台式电脑 （i5-3450四核 4G 500G 2G独显 DVD 键鼠 Linux ）&apos;,&apos;台式机&apos;,&apos;宏碁&apos;,&apos;3699&apos;,DEFAULT,DEFAULT);</div><div class="line"></div><div class="line">INSERT tdb_goods (goods_name,goods_cate,brand_name,goods_price,is_show,is_saleoff) VALUES(&apos;Z220SFF F4F06PA工作站&apos;,&apos;服务器/工作站&apos;,&apos;惠普&apos;,&apos;4288&apos;,DEFAULT,DEFAULT);</div><div class="line"></div><div class="line">INSERT tdb_goods (goods_name,goods_cate,brand_name,goods_price,is_show,is_saleoff) VALUES(&apos;PowerEdge T110 II服务器&apos;,&apos;服务器/工作站&apos;,&apos;戴尔&apos;,&apos;5388&apos;,DEFAULT,DEFAULT);</div><div class="line"></div><div class="line">INSERT tdb_goods (goods_name,goods_cate,brand_name,goods_price,is_show,is_saleoff) VALUES(&apos;Mac Pro MD878CH/A 专业级台式电脑&apos;,&apos;服务器/工作站&apos;,&apos;苹果&apos;,&apos;28888&apos;,DEFAULT,DEFAULT);</div><div class="line"></div><div class="line">INSERT tdb_goods (goods_name,goods_cate,brand_name,goods_price,is_show,is_saleoff) VALUES(&apos; HMZ-T3W 头戴显示设备&apos;,&apos;笔记本配件&apos;,&apos;索尼&apos;,&apos;6999&apos;,DEFAULT,DEFAULT);</div><div class="line"></div><div class="line">INSERT tdb_goods (goods_name,goods_cate,brand_name,goods_price,is_show,is_saleoff) VALUES(&apos;商务双肩背包&apos;,&apos;笔记本配件&apos;,&apos;索尼&apos;,&apos;99&apos;,DEFAULT,DEFAULT);</div><div class="line"></div><div class="line">INSERT tdb_goods (goods_name,goods_cate,brand_name,goods_price,is_show,is_saleoff) VALUES(&apos;X3250 M4机架式服务器 2583i14&apos;,&apos;服务器/工作站&apos;,&apos;IBM&apos;,&apos;6888&apos;,DEFAULT,DEFAULT);</div><div class="line"></div><div class="line">INSERT tdb_goods (goods_name,goods_cate,brand_name,goods_price,is_show,is_saleoff) VALUES(&apos;玄龙精英版 笔记本散热器&apos;,&apos;笔记本配件&apos;,&apos;九州风神&apos;,&apos;&apos;,DEFAULT,DEFAULT);</div><div class="line"></div><div class="line">INSERT tdb_goods (goods_name,goods_cate,brand_name,goods_price,is_show,is_saleoff) VALUES(&apos; HMZ-T3W 头戴显示设备&apos;,&apos;笔记本配件&apos;,&apos;索尼&apos;,&apos;6999&apos;,DEFAULT,DEFAULT);</div><div class="line"></div><div class="line">INSERT tdb_goods (goods_name,goods_cate,brand_name,goods_price,is_show,is_saleoff) VALUES(&apos;商务双肩背包&apos;,&apos;笔记本配件&apos;,&apos;索尼&apos;,&apos;99&apos;,DEFAULT,DEFAULT);</div></pre></td></tr></table></figure>
+<p>以上是我们的实验数据</p>
+<p><code>SET NAMES utf8</code><br>在查询时可能会出现中文乱码现象，设置查询结果的编码可以解决问题。</p>
+<h3 id="子查询（sub-query）"><a href="#子查询（sub-query）" class="headerlink" title="子查询（sub query）"></a>子查询（sub query）</h3><ol>
+<li>子查询是嵌套在查询的内部，且始终必须出现在圆括号内，</li>
+<li>子查询可以包括多个关键字或条件 ，</li>
+<li>自查询的外查询可以是;  <code>SELECT</code> <code>INSERT</code>,<code>UPDATE</code>,<code>SET</code> <code>DO.</code></li>
+<li>子查询可以返回标量、一行、一列、或者子查询</li>
+</ol>
+<h4 id="使用比较运算符的子查询"><a href="#使用比较运算符的子查询" class="headerlink" title="使用比较运算符的子查询"></a>使用比较运算符的子查询</h4><p><code>SELECT AVG(goods_price) FROM tdb_goods;</code><br>求tdb_goods表的goods_price 字段的平均值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">+------------------+</div><div class="line">| AVG(goods_price) |</div><div class="line">+------------------+</div><div class="line">|     5636.3636364 |</div><div class="line">+------------------+</div></pre></td></tr></table></figure>
+<p><code>SELECT ROUND(AVG(goods_price)) FROM tdb_goods;</code><br>求tdb_goods表的goods_price 字段的平均值,再进行四舍五入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">+-------------------------+</div><div class="line">| ROUND(AVG(goods_price)) |</div><div class="line">+-------------------------+</div><div class="line">|                    5636 |</div><div class="line">+-------------------------+</div></pre></td></tr></table></figure>
+<p><code>SELECT goods_id ,goods_name FROM tdb_goods WHERE goods_price &gt;= 5636;</code><br>求tdb_goods表中goods_price 大于5636的货物的goods_id和goods_name</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">+----------+-----------------------------------------+</div><div class="line">| goods_id | goods_name                              |</div><div class="line">+----------+-----------------------------------------+</div><div class="line">|        3 | G150TH 15.6英寸游戏本                     |</div><div class="line">|        7 | SVP13226SCB 13.3英寸触控超极本            |</div><div class="line">|       13 | iMac ME086CH/A 21.5英寸一体电脑         |</div><div class="line">|       17 | Mac Pro MD878CH/A 专业级台式电脑        |</div><div class="line">|       18 |  HMZ-T3W 头戴显示设备                   |</div><div class="line">|       20 | X3250 M4机架式服务器 2583i14            |</div><div class="line">|       21 |  HMZ-T3W 头戴显示设备                   |</div><div class="line">+----------+-----------------------------------------+</div></pre></td></tr></table></figure>
+<p>以上两句可以合写为：</p>
+<p><code>SELECT goods_id ,goods_name FROM tdb_goods WHERE goods_price &gt;=(SELECT AVG(goods_price) FROM tdb_goods);</code></p>
+<p><code>SELECT goods_price FROM tdb_goods WHERE goods_cate =&#39;超级本&#39;;</code><br>查找求tdb_goods 表中  goods_cate为 超极本货物的goods_price</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">+-------------+</div><div class="line">| goods_price |</div><div class="line">+-------------+</div><div class="line">|    4999.000 |</div><div class="line">|    4299.000 |</div><div class="line">|    7999.000 |</div><div class="line">+-------------+</div></pre></td></tr></table></figure>
+<p>在做子查询的时候肯会出现子查询语句返回多个结果比如下面的语句：<br><code>SELECT goods_id ,goods_name FROM tdb_goods WHERE goods_price &gt;=(SELECT goods_price FROM tdb_goods WHERE goods_cate =&#39;超级本&#39;);</code></p>
+<p>查询所有价格大于超极本的笔记本电脑。此MySQL会报错：<br><code>ERROR 1242 (21000): Subquery returns more than 1 row</code><br>就是子查询返回了多行</p>
+<p>此时就需要以下的关键字进行操作：</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>ANY</th>
+<th>SOME</th>
+<th>ALL </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> >、&gt;=</td>
+<td>最小值</td>
+<td>最小值</td>
+<td>最大值</td>
+</tr>
+<tr>
+<td> &lt;、&lt;=</td>
+<td>最大值</td>
+<td>最大值</td>
+<td>最小值</td>
+</tr>
+<tr>
+<td> =</td>
+<td>任意值</td>
+<td>任意值</td>
+<td>——</td>
+</tr>
+<tr>
+<td> &lt; &gt; !=</td>
+<td>——</td>
+<td>——</td>
+<td>任意值</td>
+</tr>
+</tbody>
+</table>
+<p><code>SELECT  goods_name ,goods_price  FROM tdb_goods WHERE goods_price &gt;= ANY  (SELECT goods_price FROM tdb_goods WHERE goods_cate =&#39;超级本&#39;);</code></p>
+<p>这句SQL语句加入ANY关键字其意义在于：<br>goods_price大于子查询的结果中任意一个值的。换句话说就是大于子查询中的最小值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">+-----------------------------------------+-------------+</div><div class="line">| goods_name                              | goods_price |</div><div class="line">+-----------------------------------------+-------------+</div><div class="line">| Y400N 14.0英寸笔记本电脑                |    4899.000 |</div><div class="line">| G150TH 15.6英寸游戏本                   |    8499.000 |</div><div class="line">| X240(20ALA0EYCD) 12.5英寸超极本         |    4999.000 |</div><div class="line">| U330P 13.3英寸超极本                    |    4299.000 |</div><div class="line">| SVP13226SCB 13.3英寸触控超极本          |    7999.000 |</div><div class="line">| iMac ME086CH/A 21.5英寸一体电脑         |    9188.000 |</div><div class="line">| PowerEdge T110 II服务器                 |    5388.000 |</div><div class="line">| Mac Pro MD878CH/A 专业级台式电脑        |   28888.000 |</div><div class="line">|  HMZ-T3W 头戴显示设备                   |    6999.000 |</div><div class="line">| X3250 M4机架式服务器 2583i14            |    6888.000 |</div><div class="line">|  HMZ-T3W 头戴显示设备                   |    6999.000 |</div><div class="line">+-----------------------------------------+-------------+</div></pre></td></tr></table></figure>
+<p><code>SELECT  goods_name ,goods_price  FROM tdb_goods WHERE goods_price &gt;= SOME  (SELECT goods_price FROM tdb_goods WHERE goods_cate =&#39;超级本&#39;);</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">+-----------------------------------------+-------------+</div><div class="line">| goods_name                              | goods_price |</div><div class="line">+-----------------------------------------+-------------+</div><div class="line">| Y400N 14.0英寸笔记本电脑                |    4899.000 |</div><div class="line">| G150TH 15.6英寸游戏本                   |    8499.000 |</div><div class="line">| X240(20ALA0EYCD) 12.5英寸超极本         |    4999.000 |</div><div class="line">| U330P 13.3英寸超极本                    |    4299.000 |</div><div class="line">| SVP13226SCB 13.3英寸触控超极本          |    7999.000 |</div><div class="line">| iMac ME086CH/A 21.5英寸一体电脑         |    9188.000 |</div><div class="line">| PowerEdge T110 II服务器                 |    5388.000 |</div><div class="line">| Mac Pro MD878CH/A 专业级台式电脑        |   28888.000 |</div><div class="line">|  HMZ-T3W 头戴显示设备                   |    6999.000 |</div><div class="line">| X3250 M4机架式服务器 2583i14            |    6888.000 |</div><div class="line">|  HMZ-T3W 头戴显示设备                   |    6999.000 |</div><div class="line">+-----------------------------------------+-------------+</div></pre></td></tr></table></figure>
+<p>以下语句效果等效：</p>
+<table>
+<thead>
+<tr>
+<th>X</th>
+<th>X</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>=ALL</td>
+<td>IN </td>
+</tr>
+<tr>
+<td>!=ALL 或&lt; &gt; ALL</td>
+<td>NOT IN</td>
+</tr>
+</tbody>
+</table>
+<p>等于全部换句话说就是在集合中。<br>不等于全部、大于或小于全部 就是不在集合中</p>
+<p>以下两句等效：</p>
+<p><code>SELECT  goods_name ,goods_price  FROM tdb_goods WHERE goods_price =  ANY (SELECT goods_price FROM tdb_goods WHERE goods_cate =&#39;超级本&#39;);</code></p>
+<p><code>SELECT  goods_name ,goods_price  FROM tdb_goods WHERE goods_price IN  (SELECT goods_price FROM tdb_goods WHERE goods_cate =&#39;超级本&#39;);</code></p>
+<p>查询tdb_goods表中goods_cate为超级本的记录的goods_name和goods_price。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">+---------------------------------------+-------------+</div><div class="line">| goods_name                            | goods_price |</div><div class="line">+---------------------------------------+-------------+</div><div class="line">| X240(20ALA0EYCD) 12.5英寸超极本       |    4999.000 |</div><div class="line">| U330P 13.3英寸超极本                  |    4299.000 |</div><div class="line">| SVP13226SCB 13.3英寸触控超极本        |    7999.000 |</div><div class="line">+---------------------------------------+-------------+</div></pre></td></tr></table></figure>
+<h3 id="接下来将提取所有的笔记本类型创建新的表，建立外键连接"><a href="#接下来将提取所有的笔记本类型创建新的表，建立外键连接" class="headerlink" title="接下来将提取所有的笔记本类型创建新的表，建立外键连接"></a>接下来将提取所有的笔记本类型创建新的表，建立外键连接</h3><p><code>CREATE TABLE IF NOT EXISTS tdb_good_cates(  cate_id INT UNSIGNED  PRIMARY KEY AUTO_INCREMENT , cate_name VARCHAR(40) NOT NULL );</code><br>创建新表用来存放cates字段</p>
+<p><code>SELECT goods_cate FROM tdb_goods GROUP BY goods_cate;</code><br>查询tdb_goods表所有goods_cate的值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">+---------------------+</div><div class="line">| goods_cate          |</div><div class="line">+---------------------+</div><div class="line">| 台式机              |</div><div class="line">| 平板电脑            |</div><div class="line">| 服务器/工作站       |</div><div class="line">| 游戏本              |</div><div class="line">| 笔记本              |</div><div class="line">| 笔记本配件          |</div><div class="line">| 超级本              |</div><div class="line">+---------------------+</div></pre></td></tr></table></figure>
+<p><code>DESC tdb_good_cates;</code><br>查看表的键属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">+-----------+------------------+------+-----+---------+----------------+</div><div class="line">| Field     | Type             | Null | Key | Default | Extra          |</div><div class="line">+-----------+------------------+------+-----+---------+----------------+</div><div class="line">| cate_id   | int(10) unsigned | NO   | PRI | NULL    | auto_increment |</div><div class="line">| cate_name | varchar(40)      | NO   |     | NULL    |                |</div><div class="line">+-----------+------------------+------+-----+---------+----------------+</div></pre></td></tr></table></figure>
+<p><code>INSERT tdb_good_cates(cate_name) SELECT goods_cate FROM tdb_goods  GROUP BY goods_cate;</code></p>
+<p>可能会出现插入错误需要修改表的字符集<br><code>ALTER TABLE  tdb_good_cates CONVERT TO CHARACTER SET utf8;</code></p>
+<p><code>show create table tablename;</code><br>输出建表语句</p>
+<p>将tdb_goods表中所有的goods_cate记录插入在tdb_good_cates表中的cate_name字段。</p>
+<p><code>SELECT *FROM tdb_good_cates;</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">+---------+---------------------+</div><div class="line">| cate_id | cate_name           |</div><div class="line">+---------+---------------------+</div><div class="line">|       1 | 台式机              |</div><div class="line">|       2 | 平板电脑            |</div><div class="line">|       3 | 服务器/工作站       |</div><div class="line">|       4 | 游戏本              |</div><div class="line">|       5 | 笔记本              |</div><div class="line">|       6 | 笔记本配件          |</div><div class="line">|       7 | 超级本              |</div><div class="line">+---------+---------------------+</div></pre></td></tr></table></figure>
+<p>表的连接形式：</p>
+<table>
+<thead>
+<tr>
+<th>关键字</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>INNER JOIN</td>
+<td>内连接</td>
+</tr>
+<tr>
+<td>LEFT[OUTER]JOIN</td>
+<td>左外连接</td>
+</tr>
+<tr>
+<td>RIGHT[OUTER]JOIN</td>
+<td>右外连接</td>
+</tr>
+</tbody>
+</table>
+<p><code>UPDATE tdb_goods INNER JOIN tdb_good_cates ON goods_cate = cate_name SET goods_cate = cate_id;</code></p>
+<p>将两张表连接为内连接形式 并将cate_id赋值给goods_cate</p>
+<p>这时我们查看tdb_goods表<br><code>SELECT *FROM tdb_goods\G;</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">*************************** 1. row ***************************</div><div class="line">   goods_id: 1</div><div class="line"> goods_name: R510VC 15.6英寸笔记本</div><div class="line"> goods_cate: 5</div><div class="line"> brand_name: 华硕</div><div class="line">goods_price: 3399.000</div><div class="line">    is_show: 1</div><div class="line"> is_saleoff: 0</div><div class="line">*************************** 2. row ***************************</div><div class="line">   goods_id: 2</div><div class="line"> goods_name: Y400N 14.0英寸笔记本电脑</div><div class="line"> goods_cate: 5</div><div class="line"> brand_name: 联想</div><div class="line">goods_price: 4899.000</div><div class="line">    is_show: 1</div><div class="line"> is_saleoff: 0</div><div class="line">*************************** 3. row ***************************</div><div class="line">   goods_id: 3</div><div class="line"> goods_name: G150TH 15.6英寸游戏本</div><div class="line"> goods_cate: 4</div><div class="line"> brand_name: 雷神</div><div class="line">goods_price: 8499.000</div><div class="line">    is_show: 1</div><div class="line"> is_saleoff: 0</div><div class="line">*************************** 4. row ***************************</div><div class="line">   goods_id: 4</div><div class="line"> goods_name: X550CC 15.6英寸笔记本</div><div class="line"> goods_cate: 5</div><div class="line"> brand_name: 华硕</div><div class="line">goods_price: 2799.000</div><div class="line">    is_show: 1</div><div class="line"> is_saleoff: 0</div><div class="line">*************************** 5. row ***************************</div><div class="line">   goods_id: 5</div><div class="line"> goods_name: X240(20ALA0EYCD) 12.5英寸超极本</div><div class="line"> goods_cate: 7</div><div class="line"> brand_name: 联想</div><div class="line">goods_price: 4999.000</div><div class="line">    is_show: 1</div><div class="line"> is_saleoff: 0</div><div class="line">*************************** 6. row ***************************</div><div class="line"></div><div class="line">...............</div></pre></td></tr></table></figure>
+<p>字段已经全部更改</p>
+<p>查看表结构</p>
+<p><code>SHOW COLUMNS FROM  tdb_goods;</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">+-------------+------------------------+------+-----+---------+----------------+</div><div class="line">| Field       | Type                   | Null | Key | Default | Extra          |</div><div class="line">+-------------+------------------------+------+-----+---------+----------------+</div><div class="line">| goods_id    | smallint(5) unsigned   | NO   | PRI | NULL    | auto_increment |</div><div class="line">| goods_name  | varchar(150)           | NO   |     | NULL    |                |</div><div class="line">| goods_cate  | varchar(40)            | NO   |     | NULL    |                |</div><div class="line">| brand_name  | varchar(40)            | NO   |     | NULL    |                |</div><div class="line">| goods_price | decimal(15,3) unsigned | NO   |     | 0.000   |                |</div><div class="line">| is_show     | tinyint(1)             | NO   |     | 1       |                |</div><div class="line">| is_saleoff  | tinyint(1)             | NO   |     | 0       |                |</div><div class="line">+-------------+------------------------+------+-----+---------+----------------+</div></pre></td></tr></table></figure>
+<p>但是此时的goods_cate 字段确还是varchar类型，这时因该是整形的，字符个整形所占空间差距还是很大的所以我们可以修改表的字段属性</p>
+<p><code>ALTER TABLE tdb_goods  CHANGE goods_cate cat_id SMALLINT UNSIGNED NOT NULL;</code></p>
+<p>这就ok了</p>
+<p>使用相同的操作对brand_name 进行修改。</p>
+<p>```<br>+————-+————————+——+—–+———+—————-+<br>| Field       | Type                   | Null | Key | Default | Extra          |<br>+————-+————————+——+—–+———+—————-+<br>| goods_id    | smallint(5) unsigned   | NO   | PRI | NULL    | auto_increment |<br>| goods_name  | varchar(150)           | NO   |     | NULL    |                |<br>| cat_id      | smallint(5) unsigned   | NO   |     | NULL    |                |<br>| brand_id    | smallint(5) unsigned   | NO   |     | NULL    |                |<br>| goods_price | decimal(15,3) unsigned | NO   |     | 0.000   |                |<br>| is_show     | tinyint(1)             | NO   |     | 1       |                |<br>| is_saleoff  | tinyint(1)             | NO   |     | 0       |                |<br>+————-+————————+——+—–+———+—————-+</p>
+
+ 
+                <!-- Meta -->
+                <div class="post-meta">
+                    <hr>
+                    <br>
+                    <div class="post-tags">
+                        
+                    </div>
+                    <div class="post-date">
+                        2017 年 09 月 24 日
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comments -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- Disqus Comments -->
+
+
+            </div>
+        </div>
+    </div>
+</article>
+</section>
+
+    <!-- Scripts -->
+    <!-- jQuery -->
+<script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+	console.log('Hexo-theme-hollow designed by zchen9 🙋 © 2015-' + (new Date()).getFullYear());
+</script>
+
+    <!-- Google Analytics -->
+    
+
+</body>
+
+</html>
