@@ -9,9 +9,7 @@
 
     <!--Description-->
     
-        <meta name="description" content="原文
-
-Tomcat隶属于Apache基金会，是开源的轻量级Web应用服务器，使用非常广泛。server.xml是Tomcat中最重要的配置文件，server.xml的每一个元素都对应了Tomcat中的一个组件；通过对xml文件中元素的配置，可以实现对Tomcat中各个组件的控制。因此，学习serv">
+        <meta name="description" content="本文将介绍Tomcat中主要的配置文件server.xml的一些标签及其含义Tomcat隶属于Apache基金会，是开源的轻量级Web应用服务器，使用非常广泛。server.xml是Tomcat中最重要的配置文件，server.xml的每一个元素都对应了Tomcat中的一个组件；通过对xml文件中元">
     
 
     <!--Author-->
@@ -71,9 +69,86 @@ Tomcat隶属于Apache基金会，是开源的轻量级Web应用服务器，使�
         <div class="row">
             <!-- Post Main Content -->
             <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <p><a href="http://www.jianshu.com/p/40639e2b7679" target="_blank" rel="external">原文</a></p>
+                <h1 id="本文将介绍Tomcat中主要的配置文件server-xml的一些标签及其含义"><a href="#本文将介绍Tomcat中主要的配置文件server-xml的一些标签及其含义" class="headerlink" title="本文将介绍Tomcat中主要的配置文件server.xml的一些标签及其含义"></a>本文将介绍Tomcat中主要的配置文件server.xml的一些标签及其含义</h1><p><a href="https://baike.baidu.com/item/tomcat/255751?fr=aladdin" target="_blank" rel="external">Tomcat</a>隶属于Apache基金会，是开源的轻量级Web应用服务器，使用非常广泛。server.xml是Tomcat中最重要的配置文件，server.xml的每一个元素都对应了Tomcat中的一个组件；通过对xml文件中元素的配置，可以实现对Tomcat中各个组件的控制。因此，学习server.xml文件的配置，对于了解和使用Tomcat至关重要。</p>
+<p>安装好tomcat后，在conf目录下的server.xml默认会有一些配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;Server port=&quot;8005&quot; shutdown=&quot;SHUTDOWN&quot;&gt;</div><div class="line">    &lt;Listener className=&quot;org.apache.catalina.startup.VersionLoggerListener&quot; /&gt;</div><div class="line">    &lt;Listener SSLEngine=&quot;on&quot;</div><div class="line">        className=&quot;org.apache.catalina.core.AprLifecycleListener&quot; /&gt;</div><div class="line">    &lt;Listener className=&quot;org.apache.catalina.core.JasperListener&quot; /&gt;</div><div class="line">    &lt;Listener className=&quot;org.apache.catalina.core.JreMemoryLeakPreventionListener&quot; /&gt;</div><div class="line">    &lt;Listener className=&quot;org.apache.catalina.mbeans.GlobalResourcesLifecycleListener&quot; /&gt;</div><div class="line">    &lt;Listener className=&quot;org.apache.catalina.core.ThreadLocalLeakPreventionListener&quot; /&gt;</div><div class="line"></div><div class="line">    &lt;GlobalNamingResources&gt;</div><div class="line">        &lt;Resource auth=&quot;Container&quot; description=&quot;User database that can be updated and saved&quot;</div><div class="line">            factory=&quot;org.apache.catalina.users.MemoryUserDatabaseFactory&quot; name=&quot;UserDatabase&quot;</div><div class="line">            pathname=&quot;conf/tomcat-users.xml&quot; type=&quot;org.apache.catalina.UserDatabase&quot; /&gt;</div><div class="line">    &lt;/GlobalNamingResources&gt;</div><div class="line"></div><div class="line">    &lt;Service name=&quot;Catalina&quot;&gt;</div><div class="line"></div><div class="line">        &lt;Connector URIEncoding=&quot;UTF-8&quot; connectionTimeout=&quot;20000&quot;</div><div class="line">            port=&quot;80&quot; protocol=&quot;HTTP/1.1&quot; redirectPort=&quot;8443&quot; /&gt;</div><div class="line">        &lt;Connector port=&quot;8009&quot; protocol=&quot;AJP/1.3&quot; redirectPort=&quot;8443&quot; /&gt;</div><div class="line"></div><div class="line">        &lt;Engine defaultHost=&quot;localhost&quot; name=&quot;Catalina&quot;&gt;</div><div class="line"></div><div class="line">            &lt;Realm className=&quot;org.apache.catalina.realm.LockOutRealm&quot;&gt;</div><div class="line">                &lt;Realm className=&quot;org.apache.catalina.realm.UserDatabaseRealm&quot;</div><div class="line">                    resourceName=&quot;UserDatabase&quot; /&gt;</div><div class="line">            &lt;/Realm&gt;</div><div class="line"></div><div class="line">            &lt;Host appBase=&quot;webapps&quot; autoDeploy=&quot;true&quot; name=&quot;localhost&quot;</div><div class="line">                unpackWARs=&quot;true&quot;&gt;</div><div class="line"></div><div class="line">                &lt;Valve className=&quot;org.apache.catalina.valves.AccessLogValve&quot;</div><div class="line">                    directory=&quot;logs&quot; pattern=&quot;%h %l %u %t &quot;%r&quot; %s %b&quot; prefix=&quot;localhost_access_log.&quot;</div><div class="line">                    suffix=&quot;.txt&quot; /&gt;</div><div class="line"></div><div class="line">            &lt;/Host&gt;</div><div class="line">        &lt;/Engine&gt;</div><div class="line">    &lt;/Service&gt;</div></pre></td></tr></table></figure></p>
 <p><img src="../images/tomcat1.png" alt="tomcat 元素结构"></p>
-<p><a href="https://baike.baidu.com/item/tomcat/255751?fr=aladdin" target="_blank" rel="external">Tomcat</a>隶属于Apache基金会，是开源的轻量级Web应用服务器，使用非常广泛。server.xml是Tomcat中最重要的配置文件，server.xml的每一个元素都对应了Tomcat中的一个组件；通过对xml文件中元素的配置，可以实现对Tomcat中各个组件的控制。因此，学习server.xml文件的配置，对于了解和使用Tomcat至关重要。</p>
+<p>以上的就是我们要逐一介绍的节点</p>
+<h2 id="Server节点"><a href="#Server节点" class="headerlink" title="Server节点"></a>Server节点</h2><p>描述：Server代表一个Tomcat实例（一个JVM）所以server.xml中唯一一个最外层的元素（唯一）</p>
+<p>功能：提供接口让客户端能访问Server包含的Service，维护各个Service的生命周期等。</p>
+<p>属性：</p>
+<ul>
+<li>port: 指定端口监听关闭tomcat的请求，设为-1可以禁掉该端口。</li>
+<li>shutdown: 关闭tomcat的发送的字符串</li>
+</ul>
+<h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><p>描述：一个Server节点可以包含多个Service节点。不同的Service所监听的端口必须是不能重复的。</p>
+<p>功能：一个Service可以理解为Engine和Connector的容器。每个Connector通过一个特定的端口和协议接收入站请求交将其转发至关联的Engine进行处理。</p>
+<p>属性：</p>
+<ul>
+<li>name:指定service 的名字<br>会默认生成一个名为Catalina的Service</li>
+</ul>
+<p>Service包含Connector和Engine两个节点。</p>
+<h2 id="Connector"><a href="#Connector" class="headerlink" title="Connector"></a>Connector</h2><p>描述：一个Service可以包含多个Connector，Connector有多种类型</p>
+<ul>
+<li>HTTP连接器</li>
+<li>SSL连接器</li>
+<li>AJP 1.3连接器</li>
+<li>proxy连接器<br>他用来表示客户端和service之间的连接。</li>
+</ul>
+<p>HTTP connector 示例：</p>
+<p>`</p>
+<p><connector port="8080" protocol="HTTP/1.1" maxthreads="150" connectiontimeout="20000" redirectport="8443" uriencoding="UTF-8"><br>`</connector></p>
+<p>SSL connector 示例：<br>`</p>
+<p><connector port="8443" maxthreads="150" minsparethreads="25" maxsparethreads="75" enablelookups="false" acceptcount="100" debug="0" scheme="https" secure="true" clientauth="false" sslprotocol="TLS"><br>`</connector></p>
+<p>AJP connector 示例：</p>
+<p>`</p>
+<p><connector port="8009" protocol="AJP/1.3" redirectport="8443"><br>`</connector></p>
+<p>在默认的Service中包含两个Connector：<br>分别是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;Connector port=&quot;8080&quot; protocol=&quot;HTTP/1.1&quot; connectionTimeout=&quot;20000&quot;redirectPort=&quot;8443&quot;/&gt;</div><div class="line">&lt;Connector port=&quot;8009&quot; protocol=&quot;AJP/1.3&quot; redirectPort=&quot;8443&quot;/&gt;</div></pre></td></tr></table></figure>
+<p>此时Tomcat监听的HTTP请求，协议是HTTP/1.1，端口是8080，转发HTTPS请求到8443端口。</p>
+<p>配置<code>&lt;Connector port=&quot;8009&quot; protocol=&quot;AJP/1.3&quot; redirectPort=&quot;8443&quot;/&gt;</code>客户端就可以通过8009端口使用AJP协议访问tomcat。</p>
+<p>AJP协议：<br>AJP协议负责和其他http服务器建立连接，把tomcat服务器和其他http服务器连接时，就需要这个，之所以使用Tomcat和其他服务器集成，是因为Tomcat可以用作Servlet/JSP容器，但是对静态资源的处理速度较慢，不如Apache和IIS等HTTP服务器；因此常常将Tomcat与Apache等集成，前者作Servlet容器，后者处理静态资源，而AJP协议便负责Tomcat和Apache的连接</p>
+<p>功能：接收连接请求，创建Request和Response对象用于和请求端交换数据，然后分配线程让Engine处理请求并把Request和Response对象传递给Engine</p>
+<p>主要属性属性：</p>
+<ul>
+<li>port 指定服务器要创建的端口号，并在改端口监听客户端的请求。</li>
+<li>minProcessors 服务启动时创建处理请求的线程数目。</li>
+<li>maxProcessors 最大可创建的处理请求线程数目。</li>
+<li>enableLookups true:进行DNS查询得到远程客户端的实际主机名 false不进行查询。s</li>
+<li>redirectPort 如果某连接器支持的协议是HTTP，当接收客户端发来的HTTPS请求时，则转发至此属性定义的端口</li>
+<li>connectionTimeout 等待客户端发送请求的超时时间，单位为毫秒，默认为60000，即1分钟；</li>
+</ul>
+<p><a href="https://tomcat.apache.org/tomcat-8.0-doc/config/http.html" target="_blank" rel="external">其他属性</a></p>
+<h2 id="Engine"><a href="#Engine" class="headerlink" title="Engine"></a>Engine</h2><p>描述：一个Service 对应一个Engine。</p>
+<p>功能：一个Engine从一个或者多个Connector中接收请求并处理，并将完成的响应返回给Connector。</p>
+<p>主要属性：</p>
+<ul>
+<li>defaultHost 默认host的名字。</li>
+<li>name 用于日志和错误信息，在Server中唯一</li>
+<li>startStopThreads 该Engine启动子Host默认开启的线程</li>
+</ul>
+<h2 id="Host"><a href="#Host" class="headerlink" title="Host"></a>Host</h2><p>描述：一个Engine对应多个Host ，每个Host代表Engine的一个虚拟主机。Host组件至少有一个，且其中一个的name必须与Engine组件的defaultHost属性相匹配。</p>
+<p>功能：运用来运行多个web应用，负责Web应用的生命周期。</p>
+<p>tip: 虚拟主机是一种在一个web服务器上服务多个域名的机制，对每个域名而言，都好象独享了整个主机。实际上，大多数的小型商务网站都是采用虚拟主机实现的，这主要是因为虚拟主机能直接连接到Internet并提供相应的带宽，以保障合理的访问响应速度，另外虚拟主机还能提供一个稳定的固定IP。</p>
+<p>主要属性：</p>
+<ul>
+<li>name 指定虚拟主机的主机名</li>
+<li>unpackWARs 是否将war文件解压，true为运行解压war文件后灯文件夹，false直接运行war文件。</li>
+<li>autoDeploy 是否自动部署</li>
+<li>appBase 此虚拟Host的WebApp存放路径。</li>
+</ul>
+<p>若只配置appBase，不配Context 的docBase(appBase和docBase二选一就可以了)，则appBase的每个文件夹里都代表一个应用.这个目录下面的.war文件将被自动解压缩并部署为应用。</p>
+<h2 id="Context"><a href="#Context" class="headerlink" title="Context"></a>Context</h2><p>描述：一个Host可以对应多个Context，Context表示在特定的虚拟主机上运行的一个Web应用。<br>功能：</p>
+<p>主要属性：</p>
+<ul>
+<li>path 指定Web应用的URL入口 （多指项目名）</li>
+<li>docBase 指定Web应用的文件路径，可以是绝对路径，也可以是相对路径（相对该Context所在的Host的appBase属性值）</li>
+<li>reloadable 若此属性为true，tomcat在运行状态下回监视WEB-INF/classes和WEB-INF/lib目录下class的文件改动，若有文件更新服务器会重载Web应用</li>
+</ul>
+<p><a href="https://tomcat.apache.org/tomcat-8.0-doc/config/context.html" target="_blank" rel="external">其他属性</a></p>
+<p>例子：在默认Host标签中添加Context<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;Host name=&quot;localhost&quot; appBase=&quot;webapps&quot; unpackWARs=&quot;true&quot; autoDeploy=&quot;true&quot;&gt;</div><div class="line">     &lt;Valve className=&quot;org.apache.catalina.valves.AccessLogValve&quot; directory=&quot;logs&quot;</div><div class="line">                       prefix=&quot;localhost_access_log.&quot; suffix=&quot;.txt&quot;</div><div class="line">                       pattern=&quot;%h %l %u %t &quot;%r&quot; %s %b&quot;/&gt;</div><div class="line">    &lt;Context path=&quot;/test&quot; reloadable=&quot;true&quot; docBase=&quot;/Users/WLW/tomcat/webapps2&quot;&gt;</div><div class="line">    </div><div class="line">    &lt;/Context&gt;</div><div class="line">&lt;/Host&gt;</div></pre></td></tr></table></figure></p>
+<p>在<code>/Users/WLW/tomcat/webapps2</code>下创建test.html。</p>
+<p>访问<code>http://localhost:8080/test/test.html</code> </p>
+<p><a href="http://www.jianshu.com/p/40639e2b7679" target="_blank" rel="external">参考</a></p>
 
  
                 <!-- Meta -->
