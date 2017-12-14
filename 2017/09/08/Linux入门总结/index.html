@@ -89,7 +89,7 @@
 <p>这些命令不加文件默认会操作当前文件夹下所有文件</p>
 <p>所有命令都是`命令 [选项] [参数] ‘<br>这种格式 []代表可选</p>
 <h3 id="根目录"><a href="#根目录" class="headerlink" title="根目录"></a>根目录</h3><p>\<br>‘/boot’ 系统启动目录，200MB 内存应该空余几十兆，<br>在形式上boot etc 等目录是根目录的子目录但在硬盘上却有自己的独立存储空间，即使是把其他目录写完，boot目录也不受影响，系统可以正常启动</p>
-<h2 id="文件处理目录"><a href="#文件处理目录" class="headerlink" title="文件处理目录"></a>文件处理目录</h2><p>###mkdir -p[目录名]<br>make directories 创建文件夹<br>-p 创建多级目录<br><code>mkdir -p dirfather/dirson</code><br>会创建dirfather/dirson 两级目录</p>
+<h2 id="文件处理目录"><a href="#文件处理目录" class="headerlink" title="文件处理目录"></a>文件处理目录</h2><h3 id="mkdir-p-目录名"><a href="#mkdir-p-目录名" class="headerlink" title="mkdir -p[目录名]"></a>mkdir -p[目录名]</h3><p>make directories 创建文件夹<br>-p 创建多级目录<br><code>mkdir -p dirfather/dirson</code><br>会创建dirfather/dirson 两级目录</p>
 <h3 id="cd"><a href="#cd" class="headerlink" title="cd"></a>cd</h3><p>change directory切换目录<br>control+l 清屏</p>
 <ul>
 <li>cd ~进入用户的hone目录</li>
@@ -101,7 +101,7 @@
 <li>相对目录是参照当前目录</li>
 <li>绝对路径是参照更目录</li>
 </ul>
-<p>###pwd<br>print working directory 输出工作目录</p>
+<h3 id="pwd"><a href="#pwd" class="headerlink" title="pwd"></a>pwd</h3><p>print working directory 输出工作目录</p>
 <h3 id="remdir-目录名"><a href="#remdir-目录名" class="headerlink" title="remdir [目录名]"></a>remdir [目录名]</h3><p>remove empty directory 删除空文件夹<br>只能删除空目录</p>
 <h3 id="rm-rf-文件或目录"><a href="#rm-rf-文件或目录" class="headerlink" title="rm -rf [文件或目录]"></a>rm -rf [文件或目录]</h3><ul>
 <li>-r 删除目录</li>
@@ -118,8 +118,7 @@
 <ul>
 <li>可以用于改名，mv prename new name</li>
 </ul>
-<p>##常用目录</p>
-<ul>
+<h2 id="常用目录"><a href="#常用目录" class="headerlink" title="常用目录"></a>常用目录</h2><ul>
 <li>/ 根目录</li>
 <li>/bin 命令保存目录 根目录和/usr下都有bin</li>
 <li>/lib 存放一些linux的库函数</li>
@@ -146,19 +145,16 @@
 <li>/usr/bin</li>
 <li>/usr/sbin<br>bin 目录普通用户都可以使用<br>sbin 只有超级用户才可以使用</li>
 </ul>
-<p>##链接命令</p>
-<h3 id="ln-s-原文件-目标文件"><a href="#ln-s-原文件-目标文件" class="headerlink" title="ln -s [原文件] [目标文件]"></a>ln -s [原文件] [目标文件]</h3><p>link</p>
+<h2 id="链接命令"><a href="#链接命令" class="headerlink" title="链接命令"></a>链接命令</h2><h3 id="ln-s-原文件-目标文件"><a href="#ln-s-原文件-目标文件" class="headerlink" title="ln -s [原文件] [目标文件]"></a>ln -s [原文件] [目标文件]</h3><p>link</p>
 <p>选项</p>
 <ul>
 <li>-s (soft)创建软连接</li>
 </ul>
-<p>####软链接与硬链接</p>
-<p>每个文件在文件列表中都有其对应的节点和文件信息，这些信息保存了文件内容所在的内存区块数等。<br>对文件做硬链接的时候，是将文件的节点和文件信息赋值了一份。所以原文件与连接文件拥有相同的节点。</p>
+<h4 id="软链接与硬链接"><a href="#软链接与硬链接" class="headerlink" title="软链接与硬链接"></a>软链接与硬链接</h4><p>每个文件在文件列表中都有其对应的节点和文件信息，这些信息保存了文件内容所在的内存区块数等。<br>对文件做硬链接的时候，是将文件的节点和文件信息赋值了一份。所以原文件与连接文件拥有相同的节点。</p>
 <p>对文件做软链接的时候，会在文件链表写一份节点文件信息指向内存块，而内存块的内容就是原文件的节点和文件信息</p>
 <p>软硬链接修改都会引起文件内容的变化<br>对于删除原文件，硬链接可以访问继续，而软连接不可以访问。</p>
 <p>在做链接的时候指定原文件时应该使用绝对路径</p>
-<p>##文件搜索</p>
-<h3 id="locate-文件名"><a href="#locate-文件名" class="headerlink" title="locate [文件名]"></a>locate [文件名]</h3><ul>
+<h2 id="文件搜索"><a href="#文件搜索" class="headerlink" title="文件搜索"></a>文件搜索</h2><h3 id="locate-文件名"><a href="#locate-文件名" class="headerlink" title="locate [文件名]"></a>locate [文件名]</h3><ul>
 <li>/var/lib/mlocate 在此文件数据库中查</li>
 <li>updatedb 更新文件名数据库<br>块，但只能进行文件名搜索</li>
 </ul>

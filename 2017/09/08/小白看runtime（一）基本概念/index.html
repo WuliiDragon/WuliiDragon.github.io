@@ -10,8 +10,8 @@
     <!--Description-->
     
         <meta name="description" content="最近网上看了不少runtime的文章，自己总结一些也摘抄一些，避免过快的忘记
-###runtime引入
-当我们在编写OC代码时，或者是在看博客的时候，或者在最初学习OC语法的时候，当去调用一个方法时不止一次的看到或者被告知这种行为不是调用方式而是在“发消息” 这个概念，但是很少或者没有去了解究竟是为">
+runtime引入
+当我们在编写OC代码时，或者是在看博客的时候，或者在最初学习OC语法的时候，当去调用一个方法时不止一次的看到或者被告知这种行为不是调用方式而是在“发消息” 这个概念，但是很少或者没有去了解究竟是为什么。">
     
 
     <!--Author-->
@@ -72,7 +72,7 @@
             <!-- Post Main Content -->
             <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <p>最近网上看了不少runtime的文章，自己总结一些也摘抄一些，避免过快的忘记</p>
-<p>###runtime<br>引入</p>
+<h3 id="runtime"><a href="#runtime" class="headerlink" title="runtime"></a>runtime</h3><p>引入</p>
 <p>当我们在编写OC代码时，或者是在看博客的时候，或者在最初学习OC语法的时候，当去调用一个方法时不止一次的看到或者被告知这种行为不是调用方式而是在“发消息” 这个概念，但是很少或者没有去了解究竟是为什么。那究竟为什么把“方法调用”称作发消息呢？</p>
 <p>这就要从OC语言讲起，众所周知 OC是一门动态语言，什么是动态语言呢？</p>
 <blockquote>
@@ -87,7 +87,7 @@
 <p>runtime是由C和汇编编写的，目前有两个版本 modern 和 legacy 现在使用的Object-C 2.0是modern版本的runtime系统，只能运行在iOS和OS X10.5之后的64位程序。而OS X较老的32位程序仍然采用Object-c 1 中legacy版本的runtime系统。</p>
 <p>总结来说 OC是动态类型语言许多事情在编译时无法确定，需要等在运行时。而造成这种现象的因为runtime机制的存在。</p>
 <p>学习runtime先从老生常谈的objc_msgSend函数谈起</p>
-<p>###objc_msgSend函数<br>新建一个Person类有实例方法和类方法</p>
+<h3 id="objc-msgSend函数"><a href="#objc-msgSend函数" class="headerlink" title="objc_msgSend函数"></a>objc_msgSend函数</h3><p>新建一个Person类有实例方法和类方法</p>
 <ul>
 <li><code>-(void)instanceMethod;</code></li>
 <li><code>+(void)classMethod;</code></li>
@@ -104,7 +104,8 @@
 <p>学过C语言很快就能看出id是一个指向objc_object结构体的指针。<br>那我们就查看下结构体里有些什么呢？</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">struct objc_object &#123;</div><div class="line">    Class isa  OBJC_ISA_AVAILABILITY;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 <p>只有一个Class类型的指针</p>
-<p>那Class又是个什么鬼？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">typedef struct objc_class *Class;</div></pre></td></tr></table></figure></p>
+<p>那Class又是个什么鬼？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">typedef struct objc_class *Class;</div></pre></td></tr></table></figure>
 <p>原来是个指向objc_class结构体的指针啊<br>既然是个结构体那我们看下结构体有些什么<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">struct objc_class &#123;</div><div class="line">    Class isa  OBJC_ISA_AVAILABILITY;</div><div class="line"></div><div class="line">#if !__OBJC2__</div><div class="line">    Class super_class                                        OBJC2_UNAVAILABLE;</div><div class="line">    const char *name                                         OBJC2_UNAVAILABLE;</div><div class="line">    long version                                             OBJC2_UNAVAILABLE;</div><div class="line">    long info                                                OBJC2_UNAVAILABLE;</div><div class="line">    long instance_size                                       OBJC2_UNAVAILABLE;</div><div class="line">    struct objc_ivar_list *ivars                             OBJC2_UNAVAILABLE;</div><div class="line">    struct objc_method_list **methodLists                    OBJC2_UNAVAILABLE;</div><div class="line">    struct objc_cache *cache                                 OBJC2_UNAVAILABLE;</div><div class="line">    struct objc_protocol_list *protocols                     OBJC2_UNAVAILABLE;</div><div class="line">#endif</div><div class="line"></div><div class="line">&#125; OBJC2_UNAVAILABLE;</div></pre></td></tr></table></figure></p>
 <p>感觉东西好多而且加上这么多的概念有些乱啊</p>
 <p>我们就用简单的图来描述思路<br><img src="http://upload-images.jianshu.io/upload_images/1872052-76222435d30d1373.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>是不是思路清晰了许多？<br>我们着重来看下<code>methodLists</code><br>老规矩看看是个什么东西<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">struct objc_method_list &#123;</div><div class="line">    struct objc_method_list *obsolete                        OBJC2_UNAVAILABLE;</div><div class="line"></div><div class="line">    int method_count                                         OBJC2_UNAVAILABLE;</div><div class="line">#ifdef __LP64__</div><div class="line">    int space                                                OBJC2_UNAVAILABLE;</div><div class="line">#endif</div><div class="line">    /* variable length structure */</div><div class="line">    struct objc_method method_list[1]                        OBJC2_UNAVAILABLE;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -112,10 +113,9 @@
 <p>简单的理解就是<code>methodLists</code>是方法的数组<br>里面存着类或者实例的方法</p>
 <p>来看看objc_method<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">struct objc_method &#123;</div><div class="line">    SEL method_name                                          OBJC2_UNAVAILABLE;</div><div class="line">    char *method_types                                       OBJC2_UNAVAILABLE;</div><div class="line">    IMP method_imp                                           OBJC2_UNAVAILABLE;</div><div class="line">&#125;                                                            OBJC2_UNAVAILABLE;</div></pre></td></tr></table></figure></p>
 <p>是不是非常眼熟？SEL <code>objc_msgSend</code>的第二个参数<br>来看看他的真面目</p>
-<p>###SEL<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">typedef struct objc_selector *SEL;</div></pre></td></tr></table></figure></p>
+<h3 id="SEL"><a href="#SEL" class="headerlink" title="SEL"></a>SEL</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">typedef struct objc_selector *SEL;</div></pre></td></tr></table></figure>
 <p>一个指向<code>objc_selector</code>结构体的指针<br>你可以理解为：SEL是一个仅仅包含方法名字的字符串</p>
-<p>###IMP</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">typedef id (*IMP)(id, SEL, ...);</div></pre></td></tr></table></figure>
+<h3 id="IMP"><a href="#IMP" class="headerlink" title="IMP"></a>IMP</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">typedef id (*IMP)(id, SEL, ...);</div></pre></td></tr></table></figure>
 <p>恩他是个<a href="http://yulingtianxia.com/blog/2014/04/17/han-shu-zhi-zhen-yu-zhi-zhen-han-shu/" target="_blank" rel="external">函数指针</a>，它会指向一个函数。<br>当发送消息时，会执行一段代码，哪里去找那段代码呢？由IMP来指定。</p>
 <p>如果你思路清晰的话很快可以看出这货的参数和<code>objc_msgSend</code>的参数相同<br>确定一个IMP需要id和SEL。换句话说给我一个id，和一个SEL（方法名）就能确定一个方法的IMP（实现）。<br>到现在一堆的概念头都快炸了我们来完善一下思路结构图<br><img src="http://upload-images.jianshu.io/upload_images/1872052-63b3a45f8f474100.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="部分结构图"></p>
 <p>顺着思路是不是觉得思路清晰了一些，对结构有了一些直观认识。<br>但是有好多的东西都没有介绍 ，慢慢来，一口吃不成胖子。</p>
